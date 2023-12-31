@@ -11,10 +11,7 @@ const Navbar = () => {
   const pathname = usePathname();
   return (
     <>
-      <div
-        className="py-3 border-b
-            "
-      >
+      <div className="py-3 border-b bg-white">
         <div className="container flex justify-between items-center">
           <div className=" items-center flex gap-8">
             <Link href="/">
@@ -36,7 +33,7 @@ const Navbar = () => {
                       pathname === item.path
                         ? "text-foreground underline "
                         : "text-foreground/60"
-                    } hover:text-foreground/90 duration-300`,
+                    } hover:text-foreground/90 duration-300`
                   )}
                 >
                   {item.name}

@@ -20,7 +20,7 @@ export default function page() {
           <Link
             className={cn(
               buttonVariants({ variant: "default", size: "sm" }),
-              "flex gap-2",
+              "flex gap-2"
             )}
             href="/"
           >
@@ -30,7 +30,7 @@ export default function page() {
           <Link
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "flex gap-2",
+              "flex gap-2"
             )}
             href="/"
           >
@@ -58,7 +58,7 @@ export default function page() {
                 key={index}
                 className="bg-muted w-full rounded-md h-48"
               ></div>
-            ),
+            )
           )}
         </div>
       </div>
