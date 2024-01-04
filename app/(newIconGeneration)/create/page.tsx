@@ -1,7 +1,16 @@
 "use client";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, Download, Eye, EyeOff, FileEdit } from "lucide-react";
+import {
+  ArrowLeft,
+  Download,
+  Eye,
+  EyeOff,
+  FileEdit,
+  Move,
+  Trash,
+  Unlock,
+} from "lucide-react";
 import React, { useState } from "react";
 import PlayGround from "./components/PlayGround";
 import html2canvas from "html2canvas";
@@ -105,9 +114,14 @@ const CreateIcon = () => {
                     >
                       <FileEdit width={10} height={10} />
                     </button>
-
                     <button className="">
                       <Eye width={10} height={10} />
+                    </button>
+                    <button
+                      className=""
+                      onClick={() => setBaseIconModalState(true)}
+                    >
+                      <Unlock width={10} height={10} />
                     </button>
                   </span>
                 </li>
@@ -116,14 +130,25 @@ const CreateIcon = () => {
                     key={index}
                     className="flex w-full justify-between text-foreground/60 border-b py-2"
                   >
-                    Layer {item.id}
-                    <button onClick={() => toggleVisibilty(item.id)}>
-                      {item.visible === true ? (
-                        <Eye width={10} height={10} />
-                      ) : (
-                        <EyeOff width={10} height={10} />
-                      )}
-                    </button>
+                    <span className="flex gap-1 items-center ">
+                      <Move width={10} height={10} />
+                      Layer {item.id}
+                    </span>
+                    <span className="flex gap-2">
+                      <button>
+                        <Trash width={10} height={10} />
+                      </button>
+                      <button onClick={() => toggleVisibilty(item.id)}>
+                        {item.visible === true ? (
+                          <Eye width={10} height={10} />
+                        ) : (
+                          <EyeOff width={10} height={10} />
+                        )}
+                      </button>
+                      <button>
+                        <Unlock width={10} height={10} />
+                      </button>
+                    </span>
                   </li>
                 ))}
               </ul>
