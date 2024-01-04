@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@reduxjs/toolkit": "^2.0.1",
     "@uidotdev/usehooks": "^2.4.1",
     "canvas": "^2.11.2",
     "class-variance-authority": "^0.7.0",
@@ -24,6 +26,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-konva": "^18.2.10",
+    "react-redux": "^9.0.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "use-image": "^1.1.1"
@@ -43,6 +46,7 @@
     "postcss": "^8",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.10",
+    "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
