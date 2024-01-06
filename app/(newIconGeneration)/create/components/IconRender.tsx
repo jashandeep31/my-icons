@@ -27,6 +27,7 @@ const IconRender = forwardRef(
       width: 0,
       height: 0,
     });
+    const [sizeModified, setsizeModified] = useState(false);
 
     useEffect(() => {
       if (!icon.size?.width && !icon.size?.height && image) {
@@ -36,12 +37,18 @@ const IconRender = forwardRef(
             width: 300,
             height: 300 / ratio,
           });
+          if (!sizeModified) {
+            setsizeModified(true);
+          }
         }
       } else if (icon.size?.width && icon.size?.height) {
         setsize({
           width: icon.size?.width,
           height: icon.size?.height,
         });
+        if (!sizeModified) {
+          setsizeModified(true);
+        }
       }
       return () => {};
     }, [image?.width, image?.height, icon.size?.width, icon.size?.height]);
@@ -63,8 +70,8 @@ const IconRender = forwardRef(
             : toast({ title: `Layer ${icon.id} is locked` });
         }}
         // TODO: fix get the better size when someone insert the new image
-        width={size.width}
-        height={size.height}
+        width={sizeModified ? size.width : image?.width}
+        height={sizeModified ? size.height : image?.height}
         onDragEnd={(e) => {
           dispatch(
             updateIconsArrayIconPosition({

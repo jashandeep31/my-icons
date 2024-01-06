@@ -9,7 +9,7 @@ export default function page() {
     <div className="container md:mt-24 mt-6">
       <div className=" flex flex-col items-center">
         <p className="text-foreground p-2 text-sm rounded bg-muted ">
-          Library by comunity, for comunity
+          Icons library by comunity, for comunity
         </p>
         <h1 className="text-6xl my-3 font-bold">My Icons</h1>
         <p className="text-lg font-medium text-foreground/60">
