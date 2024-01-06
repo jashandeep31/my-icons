@@ -12,7 +12,7 @@ import ExportButton from "./components/ExportButton";
 // TODO: we can implement the resizable from the shadcn ui here for the left bar and right playground
 
 const CreateIcon = () => {
-  const [baseIconModalState, setBaseIconModalState] = useState(false);
+  const [baseIconModalState, setBaseIconModalState] = useState(true);
 
   return (
     <>

@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
+        session.user.role = token.role;
       }
       return session;
     },
@@ -27,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user?.id;
         return token;
       }
-      const dbUser = await db.user.findFirst({
+      const dbUser = await db.user.findUnique({
         where: {
           email: token.email,
         },
@@ -42,11 +43,14 @@ export const authOptions: NextAuthOptions = {
         token.id = String(newUser.id);
         token.name = newUser.name;
         token.email = newUser.email;
+        token.role = newUser.role;
         return token;
       }
-      token.id = String(dbUser.id);
+      token.id = dbUser.id;
       token.name = dbUser.name;
       token.email = dbUser.email;
+      token.role = dbUser.role;
+
       return token;
     },
   },
