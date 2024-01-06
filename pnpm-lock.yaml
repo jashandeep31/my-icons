@@ -32,6 +32,9 @@ dependencies:
   '@reduxjs/toolkit':
     specifier: ^2.0.1
     version: 2.0.1(react-redux@9.0.4)(react@18.2.0)
+  '@tanstack/react-query':
+    specifier: ^5.17.5
+    version: 5.17.5(react@18.2.0)
   '@uidotdev/usehooks':
     specifier: ^2.4.1
     version: 2.4.1(react-dom@18.2.0)(react@18.2.0)
@@ -106,6 +109,9 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^18.4.3
     version: 18.4.3
+  '@tanstack/eslint-plugin-query':
+    specifier: ^4.38.0
+    version: 4.38.0(eslint@8.56.0)
   '@types/node':
     specifier: ^20
     version: 20.10.5
@@ -2252,6 +2258,27 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@tanstack/eslint-plugin-query@4.38.0(eslint@8.56.0):
+    resolution: {integrity: sha512-KmcrnjTQzONBqxNWSVKyPNi5tLq0URvIiWThE9HIK5qePGtB0VqoHfOsn4nuGJD268xDNDpFQjQiko9mMa5iLQ==}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.56.0
+    dev: true
+
+  /@tanstack/query-core@5.17.4:
+    resolution: {integrity: sha512-1J2vINgJ6OH1/qgN/ouDjnRZc67TnKQ2mlIODKQr36Aa2vjMdH6Fb3pIbCRh5N6u95q6z1olp90n22eTlp9Ykg==}
+    dev: false
+
+  /@tanstack/react-query@5.17.5(react@18.2.0):
+    resolution: {integrity: sha512-TwVmK2YHW/aG6eM5Xre7akBSZHrWWa5frwQR5Kg9ERIttlVWzUHrRcsMOlB5QsMgHtlauzzr6Rm6M8a0T9Iwdg==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.17.4
+      react: 18.2.0
     dev: false
 
   /@types/json5@0.0.29:

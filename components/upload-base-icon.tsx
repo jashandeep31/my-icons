@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, useForm } from "react-hook-form";
 import * as z from "zod";
+import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { baseUrl } from "@/lib/axiosConfig";
 
@@ -39,8 +40,17 @@ const UploadBaseIcon = () => {
     formData.append("name", data.name);
     formData.append("platform", data.platform);
     formData.append("icon", data.icon[0]);
-    const res = await axios.post(baseUrl + "/baseicon/upload", formData);
-    console.log(res);
+    try {
+      const res = await axios.post(`${baseUrl}/baseicons/upload`, formData);
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.error || "Something went wrong";
+
+      toast({
+        title: errorMessage,
+        variant: "destructive",
+      });
+    }
   }
   return (
     <div className="border py-6 px-4 shadow-sm w-1/3 rounded-md">

@@ -6,7 +6,14 @@ import { Image } from "react-konva";
 import { useSelector } from "react-redux";
 import useImage from "use-image";
 const BaseIconRender = forwardRef(
-  ({ baseImage }: { baseImage: string }, ref: any) => {
+  (
+    {
+      baseImage,
+    }: {
+      baseImage: string;
+    },
+    ref: any
+  ) => {
     // react redux configs
     const baseIconConfig = useSelector(selectBaseIconConfig);
     const [image] = useImage(baseImage);

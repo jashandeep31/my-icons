@@ -7,7 +7,7 @@ const ExportButton = () => {
   const downloadImage = (dataURL: string) => {
     const link = document.createElement("a");
     link.href = dataURL;
-    link.download = "image.png";
+    link.download = "image1.png";
     link.click();
   };
 
@@ -18,6 +18,7 @@ const ExportButton = () => {
         backgroundColor: "transparent", // Set background color to transparent
       });
       const dataURL = canvas.toDataURL("image/png");
+
       downloadImage(dataURL);
     } else {
       console.error(

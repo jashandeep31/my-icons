@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 // TODO: more methods needed to be added like locked visible etc
 
@@ -21,18 +21,41 @@ const initialState: InitialStateType = {
   sizeChanged: false,
   size: { width: 0, height: 0 },
   url: "/mac.png",
+  // url: "https://my-icons.blr1.digitaloceanspaces.com/testing/baseicons/580040e1-71cb-4a05-ac02-3a2c98477c4bwindows-11-default",
   locked: true,
   visible: true,
   platform: "unknown",
 };
 
+export const updateBaseIconUrl = createAsyncThunk(
+  "updateBaseIconUrl",
+  async (url: string) => {
+    const headers = {};
+
+    const base64 = fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        return new Promise((res) => {
+          reader.onloadend = () => {
+            res(reader.result);
+          };
+        });
+      });
+    return await base64;
+  }
+);
+
 export const baseIconSlice = createSlice({
   name: "baseIconConfig",
   initialState,
   reducers: {
-    updateBaseIconUrl: (state, action) => {
-      state.url = action.payload;
-    },
+    // updateBaseIconUrl: (state, action) => {
+    //   state.url = base64;
+
+    //   // state.url = "/mac.png";
+    // },
     updateBaseIconPosition: (state, action) => {
       state.position = action.payload;
     },
@@ -43,10 +66,14 @@ export const baseIconSlice = createSlice({
       state.locked = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(updateBaseIconUrl.fulfilled, (state, action) => {
+      state.url = action.payload as string;
+    });
+  },
 });
 
 export const {
-  updateBaseIconUrl,
   updateBaseIconPosition,
   updateBaseIconVisibility,
   updateBaseIconLocked,

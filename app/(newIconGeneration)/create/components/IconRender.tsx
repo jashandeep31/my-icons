@@ -1,5 +1,5 @@
 "use client";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Image } from "react-konva";
 import useImage from "use-image";
 import { useDispatch } from "react-redux";
@@ -23,10 +23,33 @@ const IconRender = forwardRef(
   ) => {
     const [image] = useImage(icon.base64);
     const dispatch = useDispatch();
+    const [size, setsize] = useState({
+      width: 0,
+      height: 0,
+    });
+
+    useEffect(() => {
+      if (!icon.size?.width && !icon.size?.height && image) {
+        if (image.height > 300 || image.width > 300) {
+          const ratio = image.width / image.height;
+          setsize({
+            width: 300,
+            height: 300 / ratio,
+          });
+        }
+      } else if (icon.size?.width && icon.size?.height) {
+        setsize({
+          width: icon.size?.width,
+          height: icon.size?.height,
+        });
+      }
+      return () => {};
+    }, [image?.width, image?.height, icon.size?.width, icon.size?.height]);
 
     if (icon.visible === false) {
       return <Image width={0} height={0} alt="" image={image} />;
     }
+
     return (
       <Image
         alt="Image"
@@ -40,8 +63,8 @@ const IconRender = forwardRef(
             : toast({ title: `Layer ${icon.id} is locked` });
         }}
         // TODO: fix get the better size when someone insert the new image
-        width={icon.size ? icon.size.width : image?.width}
-        height={icon?.size ? icon.size.height : image?.height}
+        width={size.width}
+        height={size.height}
         onDragEnd={(e) => {
           dispatch(
             updateIconsArrayIconPosition({

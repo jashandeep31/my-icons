@@ -44,7 +44,6 @@ export const iconsArraySlice = createSlice({
       state[index].locked = action.payload.locked;
     },
     updateIconsArrayIconPosition: (state, action) => {
-      console.log(action);
       const index = state.findIndex((icon) => icon.id === action.payload.id);
       state[index].position = action.payload.position;
     },

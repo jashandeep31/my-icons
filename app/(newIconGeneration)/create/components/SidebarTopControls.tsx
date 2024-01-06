@@ -14,7 +14,11 @@ import {
   updateIconsArrayIconVisible,
 } from "@/store/features/playground/iconsArraySlice";
 
-const SidebarTopControls = () => {
+const SidebarTopControls = ({
+  setBaseIconModalState,
+}: {
+  setBaseIconModalState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const baseIconConfig = useSelector(selectBaseIconConfig);
   const iconArrayConfig = useSelector(selectIconsArrayConfig);
   const dispatch = useDispatch();
@@ -48,7 +52,7 @@ const SidebarTopControls = () => {
           Base Icon
           <span className="flex flex-wrap gap-2">
             {/* TODO: add dispatch to change url */}
-            <button className="">
+            <button className="" onClick={() => setBaseIconModalState(true)}>
               <FileEdit width={10} height={10} />
             </button>
             <button

@@ -19,6 +19,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@reduxjs/toolkit": "^2.0.1",
+    "@tanstack/react-query": "^5.17.5",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.5",
     "canvas": "^2.11.2",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "@tanstack/eslint-plugin-query": "^4.38.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
