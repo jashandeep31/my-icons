@@ -12,15 +12,16 @@ datasource db {
 
 // going to use the google login
 model User {
-  id             String      @id @default(cuid())
-  email          String      @unique
+  id             String     @id @default(cuid())
+  email          String     @unique
   name           String
-  publishedIcons Int         @default(0)
-  role           Role        @default(USER)
-  lastLogin      DateTime    @default(now())
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  BaseIcons      BaseIcons[]
+  publishedIcons Int        @default(0)
+  role           Role       @default(USER)
+  lastLogin      DateTime   @default(now())
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  BaseIcons      BaseIcon[]
+  Icon           Icon[]
 }
 
 enum Role {
@@ -28,7 +29,8 @@ enum Role {
   ADMIN
 }
 
-model BaseIcons {
+// Change this to singular
+model BaseIcon {
   id        String   @id @default(cuid())
   name      String
   iconUrl   String
@@ -40,6 +42,21 @@ model BaseIcons {
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   approved  Boolean  @default(false)
+}
+
+model Icon {
+  id        String   @id @default(cuid())
+  name      String
+  icoURL    String
+  pngURL    String
+  likes     Int
+  downloads Int
+  platform  Paltform @default(OTHER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  public    Boolean  @default(true)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
 }
 
 enum Paltform {

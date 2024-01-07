@@ -40,7 +40,7 @@ export default function page() {
         </div>
       </div>
 
-      <div className="mt-24">
+      <div className="md:mt-24 mt-12">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-lg">Popular Icons</h2>
           {/* <div>
@@ -51,7 +51,7 @@ export default function page() {
                     </div> */}
         </div>
 
-        <div className="mt-6 grid grid-cols-6 gap-6 mb-6">
+        <div className="mt-6 grid grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-6 mb-6">
           {[1, 2, 3, 4, 5, 5, 6, 7, 78, 8, 89, 6756, 75, 6, 5].map(
             (item, index) => (
               <div

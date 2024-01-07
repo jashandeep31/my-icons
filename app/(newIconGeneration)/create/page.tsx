@@ -8,14 +8,17 @@ import BaseIconChoiceModal from "./components/BaseIconChoiceModal";
 import Link from "next/link";
 import SidebarTopControls from "./components/SidebarTopControls";
 import ExportButton from "./components/ExportButton";
+import FinalIconDetailForm from "./components/FinalIconDetailForm";
 
 // TODO: we can implement the resizable from the shadcn ui here for the left bar and right playground
 
 const CreateIcon = () => {
   const [baseIconModalState, setBaseIconModalState] = useState(false);
+  const [finalFormModalState, setFinalFormModalState] = useState(false);
 
   return (
     <>
+      {finalFormModalState && <FinalIconDetailForm />}
       {baseIconModalState && (
         <BaseIconChoiceModal setBaseIconModalState={setBaseIconModalState} />
       )}
@@ -34,7 +37,7 @@ const CreateIcon = () => {
         <div className="flex-1 grid grid-cols-5 h-full ">
           <div className="border-r p-3 flex flex-col ">
             <SidebarTopControls setBaseIconModalState={setBaseIconModalState} />
-            <ExportButton />
+            <ExportButton setFinalFormModalState={setFinalFormModalState} />
           </div>
           <div className="bg-muted col-span-4 flex items-center justify-center">
             <div>

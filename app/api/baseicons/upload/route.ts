@@ -49,7 +49,7 @@ export const POST = catchAsync(async (req: Request) => {
     icon
   );
 
-  const baseicon = await db.baseIcons.create({
+  const baseicon = await db.baseIcon.create({
     data: {
       name: validatedFormData.name,
       iconUrl: url,

@@ -18,7 +18,7 @@ const Navbar = async () => {
             <DesktopNavMenu />
           </div>
 
-          <div>
+          <div className="md:flex hidden">
             {session ? (
               <Link
                 href="/my-profile"
