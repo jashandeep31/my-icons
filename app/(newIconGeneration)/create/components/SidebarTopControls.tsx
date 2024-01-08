@@ -9,6 +9,7 @@ import {
 import { useDropzone } from "react-dropzone";
 import {
   addIconsArrayIcon,
+  removeIconsArrayIcon,
   selectIconsArrayConfig,
   updateIconsArrayIconLocked,
   updateIconsArrayIconVisible,
@@ -88,7 +89,9 @@ const SidebarTopControls = ({
           >
             <span className="flex gap-1 items-center ">Layer {item.id}</span>
             <span className="flex gap-2">
-              <button>
+              <button
+                onClick={() => dispatch(removeIconsArrayIcon({ id: item.id }))}
+              >
                 <Trash width={10} height={10} />
               </button>
               <button

@@ -31,9 +31,10 @@ export const iconsArraySlice = createSlice({
 
       state.push(data);
     },
-    removeIconsArrayIcon: (state, action) => {
-      const index = state.findIndex((icon) => icon.id === action.payload);
-      state.splice(index, 1);
+    removeIconsArrayIcon: (state, action: PayloadAction<{ id: number }>) => {
+      const id = action.payload.id;
+      state.splice(id, 1);
+      state.forEach((item, i) => (item.id = i));
     },
     updateIconsArrayIconVisible: (state, action) => {
       const index = state.findIndex((icon) => icon.id === action.payload.id);

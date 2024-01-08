@@ -33,7 +33,7 @@ export default function page() {
               buttonVariants({ variant: "outline", size: "sm" }),
               "flex gap-2"
             )}
-            href="/"
+            href="https://github.com/jashandeep31/my-icons"
           >
             <Icons.gitHub width={15} />
             Github

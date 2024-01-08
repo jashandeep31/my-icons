@@ -13,6 +13,7 @@ import axios from "axios";
 import { baseUrl } from "@/lib/axiosConfig";
 import { iconTypes } from "@/types";
 import { useClickAway } from "@uidotdev/usehooks";
+import { toast } from "./ui/use-toast";
 
 const IconViewModal = () => {
   const iconModalConfig = useSelector(selectIconModalConfig);
@@ -46,7 +47,10 @@ attrib +r "%cd%"
         setMessageCopied(false);
       }, 2000);
     } catch (e) {
-      alert("failed to copy");
+      toast({
+        title: "Copy failed",
+        variant: "destructive",
+      });
     }
   };
 
@@ -121,7 +125,7 @@ attrib +r "%cd%"
               </button>
             </div>
           </div>
-          <div className="h-full flex flex-col py-12 justify-between">
+          <div className="h-full flex flex-col  py-12 justify-between">
             <div>
               <h1 className="text-xl font-bold">{iconData.name}</h1>
               <p className="text-sm text-foreground underline">
