@@ -18,7 +18,9 @@ const CreateIcon = () => {
 
   return (
     <>
-      {finalFormModalState && <FinalIconDetailForm />}
+      {finalFormModalState && (
+        <FinalIconDetailForm setFinalFormModalState={setFinalFormModalState} />
+      )}
       {baseIconModalState && (
         <BaseIconChoiceModal setBaseIconModalState={setBaseIconModalState} />
       )}

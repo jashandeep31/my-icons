@@ -11,7 +11,7 @@ import { selectIconsArrayConfig } from "@/store/features/playground/iconsArraySl
 const PlayGround = () => {
   const baseIconConfig = useSelector(selectBaseIconConfig);
   const iconsArrayConfig = useSelector(selectIconsArrayConfig);
-  const stageRef = useRef();
+  const stageRef = useRef<any>();
   const outerRef = useClickAway<HTMLDivElement>(() => {
     transformerRef.current.nodes([]);
   });
@@ -37,6 +37,7 @@ const PlayGround = () => {
         width={stageWidthHeight.width}
         height={stageWidthHeight.height}
         className="overflow-hidden"
+        ref={stageRef}
       >
         {/* TODO: Add the guide lines for the icons */}
         <Layer>
@@ -49,6 +50,7 @@ const PlayGround = () => {
             ),
             [baseIconConfig.url]
           )}
+
           <IconsRender />
           <Transformer ref={transformerRef} />
         </Layer>

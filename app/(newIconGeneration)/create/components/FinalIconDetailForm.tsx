@@ -7,6 +7,7 @@ import { baseUrl } from "@/lib/axiosConfig";
 import { cn } from "@/lib/utils";
 import { selectConvertedIconsConfig } from "@/store/features/playground/convertedIconsSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useClickAway } from "@uidotdev/usehooks";
 import axios from "axios";
 import { X } from "lucide-react";
 import React from "react";
@@ -20,7 +21,15 @@ const formSchema = z.object({
   public: z.boolean(),
 });
 
-const FinalIconDetailForm = () => {
+const FinalIconDetailForm = ({
+  setFinalFormModalState,
+}: {
+  setFinalFormModalState: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const ref = useClickAway<HTMLDivElement>(() => {
+    setFinalFormModalState(false);
+  });
+
   const convertedIconsConfig = useSelector(selectConvertedIconsConfig);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,10 +57,13 @@ const FinalIconDetailForm = () => {
 
   return (
     <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10">
-      <div className="bg-white  rounded    md:w-2/4">
+      <div className="bg-white  rounded    md:w-2/4" ref={ref}>
         <div className="flex justify-between items-center p-4 ">
           <h2 className="text-lg font-bold  ">Final Form</h2>
-          <button>
+          <button
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            onClick={() => setFinalFormModalState(false)}
+          >
             <X width={15} height={15} />
           </button>
         </div>
