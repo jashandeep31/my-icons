@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import PopularIcons from "./components/popularIcons";
 
 export default function page() {
   return (
@@ -50,17 +51,7 @@ export default function page() {
                         />
                     </div> */}
         </div>
-
-        <div className="mt-6 grid grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-6 mb-6">
-          {[1, 2, 3, 4, 5, 5, 6, 7, 78, 8, 89, 6756, 75, 6, 5].map(
-            (item, index) => (
-              <div
-                key={index}
-                className="bg-muted w-full rounded-md h-48"
-              ></div>
-            )
-          )}
-        </div>
+        <PopularIcons />
       </div>
     </div>
   );

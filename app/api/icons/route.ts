@@ -3,7 +3,6 @@ import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { uploadToS3 } from "@/lib/uploadToS3";
 import { NextResponse } from "next/server";
-import { platform } from "os";
 import slugify from "slugify";
 import * as z from "zod";
 
@@ -13,6 +12,18 @@ const FormDataSchema = z.object({
   public: z.boolean(),
   icoURL: z.string(),
   pngURL: z.string(),
+});
+
+export const GET = catchAsync(async (req: Request) => {
+  const icons = await db.icon.findMany();
+
+  return NextResponse.json(
+    {
+      message: "Icons ",
+      data: { icons },
+    },
+    { status: 200 }
+  );
 });
 
 export const POST = catchAsync(async (req: Request) => {
@@ -77,6 +88,7 @@ export const POST = catchAsync(async (req: Request) => {
       pngURL: pngURL,
       likes: 0,
       downloads: 0,
+      platform: validatedFormData.platform,
       userId: session.id,
     },
   });

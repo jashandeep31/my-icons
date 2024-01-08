@@ -10,7 +10,7 @@ export default async function layout({
 }) {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* <IconViewModal /> */}
+      <IconViewModal />
       <header className="sticky top-0">
         <Navbar />
       </header>

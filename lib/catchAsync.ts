@@ -13,9 +13,9 @@ export class AppError extends Error {
 }
 
 const catchAsync = (fn: Function) => {
-  return async (req: Request) => {
+  return async (request: Request, { params }: any) => {
     try {
-      return await fn(req);
+      return await fn(request, { params });
     } catch (e: any) {
       console.error(e); // Log the error for debugging purposes
       return NextResponse.json({ error: e.message }, { status: e.statusCode });
