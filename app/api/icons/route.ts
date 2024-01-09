@@ -100,7 +100,7 @@ export const POST = catchAsync(async (req: Request) => {
         icon,
       },
     },
-    { status: 200 }
+    { status: 201 }
   );
   // what we will get here the raw images and then we need to work based on those
 });

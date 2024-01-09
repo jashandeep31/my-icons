@@ -9,7 +9,8 @@ import { selectConvertedIconsConfig } from "@/store/features/playground/converte
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useClickAway } from "@uidotdev/usehooks";
 import axios from "axios";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
@@ -29,6 +30,7 @@ const FinalIconDetailForm = ({
   const ref = useClickAway<HTMLDivElement>(() => {
     setFinalFormModalState(false);
   });
+  const router = useRouter();
 
   const convertedIconsConfig = useSelector(selectConvertedIconsConfig);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,7 +51,7 @@ const FinalIconDetailForm = ({
 
     try {
       const res = await axios.post(`${baseUrl}/icons`, form);
-      console.log(res);
+      router.push(`/icon/${res.data.data.icon.id}`);
     } catch (error: any) {
       console.log(error.response);
     }
@@ -131,9 +133,22 @@ const FinalIconDetailForm = ({
               </label>
             </div>
             <div className="mt-4">
-              <button className={cn(buttonVariants({ size: "sm" }))}>
-                Render Icon
-              </button>
+              {!form.formState.isSubmitting ? (
+                <button className={cn(buttonVariants({ size: "sm" }))}>
+                  Render Icon
+                </button>
+              ) : (
+                <button
+                  className={cn(
+                    buttonVariants({ size: "sm" }),
+                    "flex items-center gap-2"
+                  )}
+                  disabled={true}
+                >
+                  Rendering{" "}
+                  <Loader2 className="animate-spin" width={15} height={15} />
+                </button>
+              )}
             </div>
           </form>
         </div>

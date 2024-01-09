@@ -5,7 +5,10 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["my-icons.blr1.digitaloceanspaces.com"],
+    domains: [
+      "my-icons.blr1.digitaloceanspaces.com",
+      "avatars.githubusercontent.com",
+    ],
   },
 };
 

@@ -34,8 +34,7 @@ const UploadBaseIcon = () => {
     },
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-
+    // TODO: handling isSubmitting state is pending
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("platform", data.platform);

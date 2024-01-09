@@ -23,6 +23,7 @@ export const authOptions: NextAuthOptions = {
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.role = token.role;
+        session.user.picture = token.picture;
       }
       return session;
     },
@@ -36,6 +37,7 @@ export const authOptions: NextAuthOptions = {
           email: token.email,
         },
       });
+
       if (!dbUser) {
         const newUser = await db.user.create({
           data: {
@@ -47,12 +49,14 @@ export const authOptions: NextAuthOptions = {
         token.name = newUser.name;
         token.email = newUser.email;
         token.role = newUser.role;
+        token.picture = newUser.picture || null!;
         return token;
       }
       token.id = dbUser.id;
       token.name = dbUser.name;
       token.email = dbUser.email;
       token.role = dbUser.role;
+      token.picture = dbUser.picture || null!;
 
       return token;
     },

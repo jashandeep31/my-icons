@@ -23,7 +23,7 @@ export default function page() {
               buttonVariants({ variant: "default", size: "sm" }),
               "flex gap-2"
             )}
-            href="/"
+            href="/icons"
           >
             Explore
           </Link>

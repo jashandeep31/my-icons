@@ -83,7 +83,9 @@ attrib +r "%cd%"
     <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
       <div className="rounded-md bg-white md:w-3/4 w-full " ref={ref}>
         <div className="flex border-b justify-between items-center p-4">
-          <h3 className="">Get Your Icon </h3>
+          <h3 className="text-lg font-semibold leading-none tracking-tight">
+            Get Your Icon{" "}
+          </h3>
           <button
             className={cn(
               buttonVariants({ variant: "ghost" }),
@@ -106,6 +108,7 @@ attrib +r "%cd%"
                 <img src={iconData.icoURL} alt="" />
               )}
             </div>
+            <p className="text-xs "> Drag and drop your {viewOf} file.</p>
             <div className="bg-muted p-1 rounded-md gap-2 mt-4 grid grid-cols-2 w-64 ">
               <button
                 onClick={() => setViewOf("png")}

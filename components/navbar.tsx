@@ -5,6 +5,8 @@ import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
 import DesktopNavMenu from "./desktop-navmenu";
 import { getCurrentUser } from "@/lib/session";
+import Image from "next/image";
+
 const Navbar = async () => {
   const session = await getCurrentUser();
   return (
@@ -21,10 +23,20 @@ const Navbar = async () => {
           <div className="md:flex hidden">
             {session ? (
               <Link
-                href="/my-profile"
+                href="/profile"
                 className={cn(buttonVariants({ variant: "link", size: "sm" }))}
               >
-                {session.name}
+                {session.picture ? (
+                  <Image
+                    className="border rounded-full "
+                    src={session.picture}
+                    alt=""
+                    width={30}
+                    height={30}
+                  />
+                ) : (
+                  session.name // Remove the curly braces here
+                )}
               </Link>
             ) : (
               <Link

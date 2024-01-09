@@ -1,6 +1,7 @@
 "use client";
 import { MainMenuConfig } from "@/config/navbarConfig";
 import { cn } from "@/lib/utils";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -25,6 +26,7 @@ const DesktopNavMenu = () => {
           {item.name}
         </Link>
       ))}
+      <button onClick={() => signOut()}>Logout</button>
     </nav>
   );
 };

@@ -20,6 +20,7 @@ const ImagesComponent = ({
           <img src={icoURL} className="w-full" alt="" />
         )}
       </div>
+      <p className="text-xs "> Drag and drop {viewOf} file.</p>
       <div className="bg-muted p-1 rounded-md gap-2 mt-4 grid grid-cols-2 md:w-2/4 w-full ">
         <button
           onClick={() => setViewOf("png")}
