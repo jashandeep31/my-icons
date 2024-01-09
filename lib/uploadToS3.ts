@@ -1,4 +1,8 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  PutObjectCommand,
+  S3Client,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
 import { AppError } from "./catchAsync";
 
@@ -27,4 +31,19 @@ export const uploadToS3 = async (path: string, name: string, file: Buffer) => {
     console.log(err);
     throw new AppError("something went wrong", 500);
   }
+};
+
+export const deleteFromS3 = async (url: string) => {
+  const key = url.replace(
+    `https://${process.env.STORAGE_NAME}.${process.env.STORAGE_REGION}.digitaloceanspaces.com/`,
+    ""
+  );
+  const command = new DeleteObjectCommand({
+    Bucket: process.env.STORAGE_NAME,
+    Key: key,
+  });
+
+  try {
+    const response = await client.send(command);
+  } catch (err) {}
 };

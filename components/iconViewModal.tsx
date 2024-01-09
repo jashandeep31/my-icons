@@ -30,14 +30,14 @@ const IconViewModal = () => {
   const copyCommand = () => {
     try {
       navigator.clipboard.writeText(`
-attrib -h -s "%cd%\desktop.ini"
-del /q /f "%cd%\desktop.ini"
-attrib -h "%cd%\icon.ico"
-del /q /f "%cd%\icon.ico"
+attrib -h -s "%cd%\\desktop.ini"
+del /q /f "%cd%\\desktop.ini"
+attrib -h "%cd%\\icon.ico"
+del /q /f "%cd%\\icon.ico"
 echo [.ShellClassInfo] > desktop.ini
 curl -o icon.ico ${iconData?.icoURL}
-attrib +h "%cd%\icon.ico"
-echo IconResource="%cd%\icon.ico",0 >> desktop.ini
+attrib +h "%cd%\\icon.ico"
+echo IconResource="%cd%\\icon.ico",0 >> desktop.ini
 attrib +h  desktop.ini
 attrib +r "%cd%"
       `);

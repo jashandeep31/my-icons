@@ -15,15 +15,32 @@ const FormDataSchema = z.object({
 });
 
 export const GET = catchAsync(async (req: Request) => {
-  const icons = await db.icon.findMany();
+  const { searchParams } = new URL(req.url);
+  let page = searchParams.get("page") ? searchParams.get("page") : 1;
+  page = !isNaN(Number(page)) ? Number(page) : 1;
 
-  return NextResponse.json(
-    {
-      message: "Icons ",
-      data: { icons },
+  let platform = searchParams.get("platform")
+    ? searchParams.get("platform")?.toUpperCase().trim()
+    : "all";
+
+  const where: {
+    public: true;
+    platform?: "MACOS" | "OTHER" | "WINDOWS";
+  } = {
+    public: true,
+  };
+  if (platform === "MACOS" || platform === "OTHER" || platform === "WINDOWS") {
+    where["platform"] = platform;
+  }
+
+  const icons = await db.icon.findMany({
+    where,
+    orderBy: {
+      createdAt: "desc",
     },
-    { status: 200 }
-  );
+  });
+
+  return NextResponse.json({ icons }, { status: 200 });
 });
 
 export const POST = catchAsync(async (req: Request) => {

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import Image from "next/image";
 import { db } from "@/lib/db";
-import IconModifyModal from "./components/iconModifyModal";
+import MyIconsRenderer from "./components/myIconsRenderer";
 
 const page = async () => {
   const session = await getCurrentUser();
@@ -19,12 +19,10 @@ const page = async () => {
 
   return (
     <div>
-      {/* <IconModifyModal /> */}
       <h1 className="text-3xl font-bold">My Icons</h1>
       <div className="border rounded-md p-4 mt-6 flex flex-col gap-4">
-        <div className="grid grid-cols-6 gap-4">
-          {/* TODO: not optimized for multiple icons loading */}
-          {icons.map((icon, index) => (
+        {/* TODO: not optimized for multiple icons loading */}
+        {/* {icons.map((icon, index) => (
             <div key={index} className="bg-muted rounded-md p-4">
               <Image
                 src={icon.pngURL}
@@ -37,8 +35,8 @@ const page = async () => {
                 {icon.name}
               </p>
             </div>
-          ))}
-        </div>
+          ))} */}
+        <MyIconsRenderer />
       </div>
     </div>
   );

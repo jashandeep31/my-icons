@@ -15,7 +15,7 @@ const config = [
     href: "/profile/my-icons",
   },
   {
-    name: "Account Setting",
+    name: "Account Settings",
     href: "/profile/settings",
   },
 ];
@@ -24,7 +24,7 @@ const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="text-sm flex flex-col gap-2">
+    <ul className="text-sm flex flex-wrap md:flex-col gap-2">
       {config.map((item, index) => (
         <li key={index}>
           <Link

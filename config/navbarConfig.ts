@@ -4,6 +4,10 @@ export const MainMenuConfig = [
     path: "/",
   },
   {
+    name: "All Icons",
+    path: "/icons",
+  },
+  {
     name: "Create Custom Icon",
     path: "/create",
   },

@@ -12,8 +12,8 @@ const PopularIcons = () => {
   const dispatch = useDispatch();
   const getPopularIcons = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/icons`);
-      return res.data.data.icons;
+      const res = await axios.get(`${baseUrl}/icons/popular`);
+      return res.data.icons;
     } catch (e) {
       return null;
     }
