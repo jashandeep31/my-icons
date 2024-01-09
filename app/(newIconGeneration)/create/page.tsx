@@ -3,14 +3,18 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
-import PlayGround from "./components/PlayGround";
+// import PlayGround from "./components/PlayGround";
 import BaseIconChoiceModal from "./components/BaseIconChoiceModal";
 import Link from "next/link";
 import SidebarTopControls from "./components/SidebarTopControls";
 import ExportButton from "./components/ExportButton";
 import FinalIconDetailForm from "./components/FinalIconDetailForm";
+import dynamic from "next/dynamic";
 
 // TODO: we can implement the resizable from the shadcn ui here for the left bar and right playground
+const PlayGround = dynamic(() => import("./components/PlayGround"), {
+  ssr: false,
+});
 
 const CreateIcon = () => {
   const [baseIconModalState, setBaseIconModalState] = useState(false);
