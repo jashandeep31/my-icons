@@ -1,6 +1,6 @@
-import AuthComponentLoginSignup from "@/components/authComponentLoginSignup";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import AuthComponentLoginSignup from "@/components/authComponentLoginSignup";
 
 const page = () => {
   return (

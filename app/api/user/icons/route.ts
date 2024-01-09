@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export const GET = catchAsync(async (req: Request) => {
   const { searchParams } = new URL(req.url);
   let page = searchParams.get("page") ? searchParams.get("page") : 1;

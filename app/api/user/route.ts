@@ -6,6 +6,7 @@ import * as z from "zod";
 const nameValidationSchema = z.object({
   name: z.string().min(3, "minium 3 char"),
 });
+
 export const PATCH = catchAsync(async (req: Request) => {
   const session = await getCurrentUser();
   if (!session) {

@@ -6,3 +6,5 @@ export async function getCurrentUser() {
 
   return session?.user;
 }
+
+export const dynamic = "force-dynamic";

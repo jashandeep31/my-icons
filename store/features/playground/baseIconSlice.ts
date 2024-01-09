@@ -30,8 +30,6 @@ const initialState: InitialStateType = {
 export const updateBaseIconUrl = createAsyncThunk(
   "updateBaseIconUrl",
   async (url: string) => {
-    const headers = {};
-
     const base64 = fetch(url)
       .then((response) => response.blob())
       .then((blob) => {
