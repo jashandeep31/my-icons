@@ -8,6 +8,7 @@ const nextConfig = {
     domains: [
       "my-icons.blr1.digitaloceanspaces.com",
       "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

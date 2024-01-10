@@ -26,51 +26,21 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async session({ token, session }) {
-      return session;
-      // console.log(token);
-      // if (token) {
-      //   session.user.id = token.id;
-      //   session.user.name = token.name;
-      //   session.user.email = token.email;
-      //   session.user.role = token.role;
-      //   session.user.picture = token.picture;
-      // }
-      // return session;
-    },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
       return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+        session.user.role = token.role;
+      }
 
-      // console.log(user);
-      // if (!token.email || !token.name) {
-      //   token.id = user?.id;
-      //   return token;
-      // }
-      // const dbUser = await db.user.findUnique({
-      //   where: {
-      //     email: token.email,
-      //   },
-      // });
-      // if (!dbUser) {
-      //   const newUser = await db.user.create({
-      //     data: {
-      //       email: token.email,
-      //       name: token.name,
-      //     },
-      //   });
-      //   token.id = String(newUser.id);
-      //   token.name = newUser.name;
-      //   token.email = newUser.email;
-      //   token.role = newUser.role;
-      //   token.picture = newUser.picture || null!;
-      //   return token;
-      // }
-      // token.id = dbUser.id;
-      // token.name = dbUser.name;
-      // token.email = dbUser.email;
-      // token.role = dbUser.role;
-      // token.picture = dbUser.picture || null!;
-      // return token;
+      return session;
     },
   },
 };

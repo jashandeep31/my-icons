@@ -26,10 +26,10 @@ const Navbar = async () => {
                 href="/profile"
                 className={cn(buttonVariants({ variant: "link", size: "sm" }))}
               >
-                {session.picture ? (
+                {session.image ? (
                   <Image
                     className="border rounded-full "
-                    src={session.picture}
+                    src={session.image}
                     alt=""
                     width={30}
                     height={30}

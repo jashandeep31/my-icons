@@ -6,7 +6,6 @@ type UserId = string;
 declare module "next-auth/jwt" {
   interface JWT {
     id: UserId;
-    picture?: string;
     role: "USER" | "ADMIN";
   }
 }
@@ -15,8 +14,10 @@ declare module "next-auth" {
   interface Session {
     user: User & {
       id: UserId;
-      picture?: string;
       role: "USER" | "ADMIN";
     };
+  }
+  interface User {
+    role: "USER" | "ADMIN";
   }
 }

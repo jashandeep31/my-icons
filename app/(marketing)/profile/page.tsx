@@ -22,16 +22,16 @@ const page = async () => {
         </div>
         <div>
           <h6 className="text-base font-medium">Profile Picture</h6>
-          {session.picture ? (
+          {session.image ? (
             <Image
               className="border rounded-full mt-2"
-              src={session.picture}
+              src={session.image}
               alt=""
               width={30}
               height={30}
             />
           ) : (
-            ""
+            "Profile Picture not found"
           )}
         </div>
       </div>
