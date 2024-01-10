@@ -38,6 +38,8 @@ export const GET = catchAsync(async (req: Request) => {
     orderBy: {
       createdAt: "desc",
     },
+    skip: (page - 1) * 24,
+    take: 24,
   });
 
   return NextResponse.json({ icons }, { status: 200 });

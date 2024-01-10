@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:3000/api";
+export const baseUrl = process.env.SELF_URL as string;
