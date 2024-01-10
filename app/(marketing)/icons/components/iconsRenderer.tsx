@@ -13,7 +13,6 @@ const IconsRenderer = () => {
   });
   const fetchIcons = async (pageParams: any) => {
     try {
-      console.log("🚀 ~ fetchIcons ~ pageParams:", pageParams);
       const res = await axios.get(`${baseUrl}/icons?page=${pageParams}`);
       return res.data.icons;
     } catch (e) {}
@@ -63,6 +62,14 @@ const IconsRenderer = () => {
                     }
                   })}
                 </React.Fragment>
+              ))
+            : null}
+          {isFetching
+            ? [...Array(12)].map((item, index) => (
+                <div
+                  key={index}
+                  className="min-h-48 w-full bg-muted rounded-md animate-pulse"
+                ></div>
               ))
             : null}
         </div>

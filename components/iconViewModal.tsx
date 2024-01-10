@@ -58,7 +58,7 @@ attrib +r "%cd%"
     if (iconModalConfig.active) {
       axios
         .get(`${baseUrl}/icons/get/${iconModalConfig.id}`)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status === 200) {
             setIconData(res.data.data.icon);
           }
@@ -74,11 +74,32 @@ attrib +r "%cd%"
     }
   }, [iconModalConfig]);
 
-  if (!iconData || loading) {
-    return null;
+  if (!iconData) {
+    return (
+      <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
+        <div
+          className="rounded-md bg-white md:w-3/4 w-full h-3/4 grid md:grid-cols-2 p-12 gap-6"
+          ref={ref}
+        >
+          <div className="w-full h-full animate-pulse rounded-md bg-slate-200 "></div>
+          <div className="flex justify-between py-12 flex-col">
+            <div>
+              <div className="h-6 bg-slate-200 rounded"></div>
+              <div className="h-2 mt-3  bg-slate-200 rounded w-1/3"></div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-200 rounded h-12 w-full"></div>
+              <div className="bg-slate-200 rounded h-12 w-full"></div>
+            </div>
+            <div>
+              <div className="h-3 bg-slate-200 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  if (!iconModalConfig.active) return null;
   return (
     <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
       <div className="rounded-md bg-white md:w-3/4 w-full " ref={ref}>

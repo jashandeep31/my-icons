@@ -13,7 +13,7 @@ const AuthComponentLoginSignup = () => {
           buttonVariants({ variant: "outline" }),
           "w-full flex items-center justify-center gap-2"
         )}
-        onClick={() => signIn("github")}
+        onClick={() => signIn("github", { redirect: true, callbackUrl: "/" })}
       >
         <Icons.gitHub className="w-4" />
         Github
@@ -23,6 +23,7 @@ const AuthComponentLoginSignup = () => {
           buttonVariants({ variant: "outline" }),
           "w-full flex items-center justify-center gap-2"
         )}
+        onClick={() => signIn("google")}
       >
         <Icons.google className="w-4" />
         Google

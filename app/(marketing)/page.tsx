@@ -73,7 +73,7 @@ export default async function page() {
         </div>
         <div>
           <Link className={"text-sm underline"} href={"/icons"}>
-            Load More
+            See more
           </Link>
         </div>
       </div>

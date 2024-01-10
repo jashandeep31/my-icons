@@ -93,6 +93,14 @@ const MyIconsRenderer = () => {
               </React.Fragment>
             ))
           : null}
+        {isFetching
+          ? [...Array(6)].map((item, index) => (
+              <div
+                key={index}
+                className="min-h-36 w-full bg-muted rounded-md animate-pulse"
+              ></div>
+            ))
+          : null}
       </div>
       <div className="mt-4 flex justify-center">
         <button
