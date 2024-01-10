@@ -3,19 +3,19 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { baseUrl } from "@/lib/axiosConfig";
-import { iconTypes } from "@/types";
 import IconCard from "@/components/iconCard";
+import { db } from "@/lib/db";
 
 async function getPopularIcons() {
-  const res = await fetch(`${baseUrl}/icons/popular`, {
-    next: { revalidate: 3600 },
+  const res = await db.icon.findMany({
+    orderBy: {
+      downloads: "desc",
+    },
+    skip: 0,
+    take: 12,
   });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  const data = await res.json();
-  return data.icons as iconTypes[];
+
+  return res;
 }
 
 export default async function page() {
