@@ -7,4 +7,5 @@ export type iconTypes = {
   downloads: number;
   userId: string;
   id: string;
+  public: boolean;
 };

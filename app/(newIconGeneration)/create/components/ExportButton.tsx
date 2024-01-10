@@ -53,7 +53,7 @@ const ExportButton = ({
       const form = new FormData();
       form.append("image", dataURLtoBlob(dataURL));
       axios
-        .post(process.env.CONVERTER_URL as string, form)
+        .post(process.env.NEXT_PUBLIC_CONVERTER_URL as string, form)
         .then((res) => {
           dispatch(
             updateConvertedIconsUrl({

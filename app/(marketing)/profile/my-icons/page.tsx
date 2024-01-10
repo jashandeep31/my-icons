@@ -1,8 +1,6 @@
+import React from "react";
 import { getCurrentUser } from "@/lib/session";
 import { redirect } from "next/navigation";
-import React from "react";
-import Image from "next/image";
-import { db } from "@/lib/db";
 import MyIconsRenderer from "./components/myIconsRenderer";
 
 const page = async () => {
@@ -10,12 +8,6 @@ const page = async () => {
   if (!session) {
     redirect("/login");
   }
-
-  const icons = await db.icon.findMany({
-    where: {
-      userId: session.id,
-    },
-  });
 
   return (
     <div>

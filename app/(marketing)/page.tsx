@@ -3,9 +3,23 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import PopularIcons from "./components/popularIcons";
+import { baseUrl } from "@/lib/axiosConfig";
+import { iconTypes } from "@/types";
+import IconCard from "@/components/iconCard";
 
-export default function page() {
+async function getPopularIcons() {
+  const res = await fetch(`${baseUrl}/icons/popular`, {
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await res.json();
+  return data.icons as iconTypes[];
+}
+
+export default async function page() {
+  const icons = await getPopularIcons();
   return (
     <div className="container md:mt-24 mt-6">
       <div className=" flex flex-col items-center">
@@ -44,6 +58,7 @@ export default function page() {
       <div className="md:mt-24 mt-12">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-lg">Popular Icons</h2>
+          {/* TODO: add fitler and show more button */}
           {/* <div>
                         <input
                             type="text"
@@ -51,7 +66,16 @@ export default function page() {
                         />
                     </div> */}
         </div>
-        <PopularIcons />
+        <div className="mt-6 grid grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-6 mb-6">
+          {icons.map((icon, index) => (
+            <IconCard icon={icon} key={index} />
+          ))}
+        </div>
+        <div>
+          <Link className={"text-sm underline"} href={"/icons"}>
+            Load More
+          </Link>
+        </div>
       </div>
     </div>
   );

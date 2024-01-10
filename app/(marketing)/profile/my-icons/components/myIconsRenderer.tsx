@@ -16,6 +16,7 @@ const MyIconsRenderer = () => {
   const dispatch = useDispatch();
   const [iconEditModal, setIconEditModal] = useState(false);
   const [iconEditModalId, setIconEditModalId] = useState<string>("");
+  const [iconDetail, setIconDetail] = useState<iconTypes | null>();
   const fetchIcons = async ({ pageParam }: { pageParam: any }) => {
     try {
       const res = await axios.get(`${baseUrl}/user/icons?page=${pageParam}`);
@@ -49,6 +50,7 @@ const MyIconsRenderer = () => {
           id={iconEditModalId}
           setIconEditModal={setIconEditModal}
           refetch={refetch}
+          icon={iconDetail as any}
         />
       ) : null}
       <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4">
@@ -79,6 +81,7 @@ const MyIconsRenderer = () => {
                         onClick={() => {
                           setIconEditModal(true);
                           setIconEditModalId(icon.id);
+                          setIconDetail(icon);
                         }}
                         className="p-1 hover:bg-white duration-300 rounded"
                       >

@@ -1,19 +1,34 @@
-import { buttonVariants } from "@/components/ui/button";
+"use client";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { baseUrl } from "@/lib/axiosConfig";
 import { cn } from "@/lib/utils";
+import { iconTypes } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useClickAway } from "@uidotdev/usehooks";
 import axios from "axios";
 import { X } from "lucide-react";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Label } from "react-konva";
+import * as z from "zod";
+
+const formSchema = z.object({
+  name: z.string().min(3, "minimum 3 char"),
+  public: z.boolean(),
+});
 
 const IconModifyModal = ({
   id,
+  icon,
   setIconEditModal,
   refetch,
 }: {
   id: string;
   setIconEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+  icon: iconTypes;
   refetch: any;
 }) => {
   const ref = useClickAway<HTMLDivElement>(() => {
@@ -32,7 +47,34 @@ const IconModifyModal = ({
       setIconEditModal(false);
       setProcessingDelete(false);
     } catch (e) {
-      console.log(e);
+      toast({
+        title: "Something went wrong",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: icon.name,
+      public: icon.public,
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const res = await axios.patch(`${baseUrl}/icon/${id}`, data);
+      refetch();
+      toast({
+        title: "Icon Updated",
+      });
+      setIconEditModal(false);
+    } catch (e) {
+      toast({
+        title: "Something went wrong",
+        variant: "destructive",
+      });
     }
   };
 
@@ -53,17 +95,46 @@ const IconModifyModal = ({
             <X width={15} height={15} />
           </button>
         </div>
-        <div className="p-4">
-          <p className="text-sm text-muted-foreground mb-2">
-            Deleting Icon can&apos;t be undone.
-          </p>
-          <button
-            onClick={sendDeleteRequest}
-            className={cn(buttonVariants({ variant: "destructive" }))}
-            disabled={processingDelete}
+        <div className="px-4 py-2">
+          <form
+            action=""
+            className="flex flex-col gap-3"
+            onSubmit={form.handleSubmit(onSubmit)}
           >
-            Delete
-          </button>
+            <div>
+              <Label>Name:</Label>
+              <Input {...form.register("name")} type="text" placeholder="" />
+            </div>
+            <div className="flex items-center space-x-2 mt-4">
+              <Checkbox
+                id="terms"
+                checked={form.getValues("public")}
+                onCheckedChange={(e: boolean) => form.setValue("public", e)}
+              />
+              <label
+                htmlFor="terms"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Public?
+              </label>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                Update
+              </Button>
+              <button
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "text-red-600 border-red-600  hover:bg-red-200"
+                )}
+                onClick={sendDeleteRequest}
+                type="button"
+                disabled={processingDelete}
+              >
+                Delete
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

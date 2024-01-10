@@ -5,6 +5,7 @@ import { uploadToS3 } from "@/lib/uploadToS3";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
 import * as z from "zod";
+import sharp from "sharp";
 
 const FormDataSchema = z.object({
   name: z.string().min(3, "Name is required atleast 3 char"),
@@ -87,6 +88,8 @@ export const POST = catchAsync(async (req: Request) => {
   );
   const base64String = validatedFormData.pngURL.split(",")[1];
   const pngBuffer = Buffer.from(base64String, "base64");
+  const resizedImageBuffer = await sharp(pngBuffer).resize(256, 256).toBuffer();
+
   const pngURL = await uploadToS3(
     "icofiletesting",
     `${slugify(validatedFormData.name, {
@@ -97,7 +100,7 @@ export const POST = catchAsync(async (req: Request) => {
       locale: "vi", // language code of the locale to use
       trim: true,
     })}.png`,
-    pngBuffer
+    resizedImageBuffer
   );
 
   const icon = await db.icon.create({
