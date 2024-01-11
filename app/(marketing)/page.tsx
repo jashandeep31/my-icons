@@ -8,6 +8,9 @@ import { db } from "@/lib/db";
 
 async function getPopularIcons() {
   const res = await db.icon.findMany({
+    where: {
+      public: true,
+    },
     orderBy: {
       downloads: "desc",
     },

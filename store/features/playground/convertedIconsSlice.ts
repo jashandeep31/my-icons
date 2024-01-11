@@ -4,7 +4,6 @@ import { RootState } from "@/store/store";
 
 const initialState = {
   pngURL: "",
-  icoURL: "",
 };
 
 const covertedIconsSlice = createSlice({
@@ -12,7 +11,6 @@ const covertedIconsSlice = createSlice({
   initialState,
   reducers: {
     updateConvertedIconsUrl: (state, action) => {
-      state.icoURL = action.payload.icoURL;
       state.pngURL = action.payload.pngURL;
     },
   },

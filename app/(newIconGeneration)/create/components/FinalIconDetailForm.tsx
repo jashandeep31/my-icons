@@ -45,12 +45,11 @@ const FinalIconDetailForm = ({
     const form = new FormData();
     form.append("name", data.name);
     form.append("platform", data.platform);
-    form.append("icoURL", convertedIconsConfig.icoURL);
     form.append("pngURL", convertedIconsConfig.pngURL);
     form.append("public", data.public.toString());
 
     try {
-      const res = await axios.post(`${baseUrl}/icons`, form);
+      const res = await axios.post(`${baseUrl}/icon`, form);
       router.push(`/icon/${res.data.icon.id}`);
     } catch (error: any) {
       console.log(error.response);
