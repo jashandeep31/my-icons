@@ -14,6 +14,7 @@ const FormDataSchema = z.object({
   icoURL: z.string(),
   pngURL: z.string(),
 });
+export const dynamic = "force-dynamic";
 
 export const GET = catchAsync(async (req: Request) => {
   const { searchParams } = new URL(req.url);
