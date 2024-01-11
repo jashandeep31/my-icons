@@ -5,7 +5,6 @@ import { uploadToS3 } from "@/lib/uploadToS3";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
 import * as z from "zod";
-import sharp from "sharp";
 
 const FormDataSchema = z.object({
   name: z.string().min(3, "Name is required atleast 3 char"),
@@ -16,45 +15,38 @@ const FormDataSchema = z.object({
 });
 export const dynamic = "force-dynamic";
 
-export const GET = async (req: Request) => {
-  // const { searchParams } = new URL(req.url);
-  // let page = searchParams.get("page") ? searchParams.get("page") : 1;
-  // page = !isNaN(Number(page)) ? Number(page) : 1;
+export const GET = catchAsync(async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  let page = searchParams.get("page") ? searchParams.get("page") : 1;
+  page = !isNaN(Number(page)) ? Number(page) : 1;
 
-  // let platform = searchParams.get("platform")
-  //   ? searchParams.get("platform")?.toUpperCase().trim()
-  //   : "all";
+  let platform = searchParams.get("platform")
+    ? searchParams.get("platform")?.toUpperCase().trim()
+    : "all";
 
-  // const where: {
-  //   public: true;
-  //   platform?: "MACOS" | "OTHER" | "WINDOWS";
-  // } = {
-  //   public: true,
-  // };
-  // if (platform === "MACOS" || platform === "OTHER" || platform === "WINDOWS") {
-  //   where["platform"] = platform;
-  // }
+  const where: {
+    public: true;
+    platform?: "MACOS" | "OTHER" | "WINDOWS";
+  } = {
+    public: true,
+  };
+  if (platform === "MACOS" || platform === "OTHER" || platform === "WINDOWS") {
+    where["platform"] = platform;
+  }
 
-  return Response.json({ message: "api is fine" }, { status: 200 });
+  const icons = await db.icon.findMany({
+    where: {
+      public: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    skip: (page - 1) * 24,
+    take: 24,
+  });
 
-  // try {
-  //   const icons = await db.icon.findMany({
-  //     where: {
-  //       public: true,
-  //     },
-  //     orderBy: {
-  //       createdAt: "desc",
-  //     },
-  //     // skip: (page - 1) * 24,
-  //     // take: 24,
-  //   });
-
-  //   return NextResponse.json({ icons }, { status: 200 });
-  // } catch (e) {
-  //   console.log(e);
-  //   return NextResponse.json({ message: "failed" }, { status: 401 });
-  // }
-};
+  return NextResponse.json({ icons }, { status: 200 });
+});
 
 export const POST = catchAsync(async (req: Request) => {
   const session = await getCurrentUser();
@@ -98,7 +90,7 @@ export const POST = catchAsync(async (req: Request) => {
   );
   const base64String = validatedFormData.pngURL.split(",")[1];
   const pngBuffer = Buffer.from(base64String, "base64");
-  const resizedImageBuffer = await sharp(pngBuffer).resize(256, 256).toBuffer();
+  // const resizedImageBuffer = await sharp(pngBuffer).resize(256, 256).toBuffer();
 
   const pngURL = await uploadToS3(
     "icofiletesting",
@@ -110,7 +102,7 @@ export const POST = catchAsync(async (req: Request) => {
       locale: "vi", // language code of the locale to use
       trim: true,
     })}.png`,
-    resizedImageBuffer
+    pngBuffer
   );
 
   const icon = await db.icon.create({
