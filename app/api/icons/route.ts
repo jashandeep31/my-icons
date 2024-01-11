@@ -16,7 +16,7 @@ const FormDataSchema = z.object({
 });
 export const dynamic = "force-dynamic";
 
-export const GET = catchAsync(async (req: Request) => {
+export const GET = async (req: Request) => {
   // const { searchParams } = new URL(req.url);
   // let page = searchParams.get("page") ? searchParams.get("page") : 1;
   // page = !isNaN(Number(page)) ? Number(page) : 1;
@@ -35,19 +35,24 @@ export const GET = catchAsync(async (req: Request) => {
   //   where["platform"] = platform;
   // }
 
-  const icons = await db.icon.findMany({
-    where: {
-      public: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    // skip: (page - 1) * 24,
-    // take: 24,
-  });
+  try {
+    const icons = await db.icon.findMany({
+      where: {
+        public: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      // skip: (page - 1) * 24,
+      // take: 24,
+    });
 
-  return NextResponse.json({ icons }, { status: 200 });
-});
+    return NextResponse.json({ icons }, { status: 200 });
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json({ message: "failed" }, { status: 401 });
+  }
+};
 
 export const POST = catchAsync(async (req: Request) => {
   const session = await getCurrentUser();
