@@ -35,23 +35,25 @@ export const GET = async (req: Request) => {
   //   where["platform"] = platform;
   // }
 
-  try {
-    const icons = await db.icon.findMany({
-      where: {
-        public: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      // skip: (page - 1) * 24,
-      // take: 24,
-    });
+  return Response.json({ message: "api is fine" }, { status: 200 });
 
-    return NextResponse.json({ icons }, { status: 200 });
-  } catch (e) {
-    console.log(e);
-    return NextResponse.json({ message: "failed" }, { status: 401 });
-  }
+  // try {
+  //   const icons = await db.icon.findMany({
+  //     where: {
+  //       public: true,
+  //     },
+  //     orderBy: {
+  //       createdAt: "desc",
+  //     },
+  //     // skip: (page - 1) * 24,
+  //     // take: 24,
+  //   });
+
+  //   return NextResponse.json({ icons }, { status: 200 });
+  // } catch (e) {
+  //   console.log(e);
+  //   return NextResponse.json({ message: "failed" }, { status: 401 });
+  // }
 };
 
 export const POST = catchAsync(async (req: Request) => {
