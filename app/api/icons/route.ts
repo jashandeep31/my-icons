@@ -117,10 +117,8 @@ export const POST = catchAsync(async (req: Request) => {
 
   return NextResponse.json(
     {
-      message: "working till end",
-      data: {
-        icon,
-      },
+      message: "Icon successfully generated",
+      icon,
     },
     { status: 201 }
   );

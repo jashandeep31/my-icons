@@ -51,7 +51,7 @@ const FinalIconDetailForm = ({
 
     try {
       const res = await axios.post(`${baseUrl}/icons`, form);
-      router.push(`/icon/${res.data.data.icon.id}`);
+      router.push(`/icon/${res.data.icon.id}`);
     } catch (error: any) {
       console.log(error.response);
     }

@@ -34,14 +34,6 @@ const ExportButton = ({
 }) => {
   const dispatch = useDispatch();
 
-  //  TODO: descide about this
-  // const downloadImage = (dataURL: string) => {
-  //   const link = document.createElement("a");
-  //   link.href = dataURL;
-  //   link.download = "image1.png";
-  //   link.click();
-  // };
-
   const handleCaptureClick = async () => {
     const container = document.querySelector("#PlayGroundParent");
     if (container instanceof HTMLElement) {
@@ -53,7 +45,7 @@ const ExportButton = ({
       const form = new FormData();
       form.append("image", dataURLtoBlob(dataURL));
       axios
-        .post(process.env.NEXT_PUBLIC_CONVERTER_URL as string, form)
+        .post(`${process.env.NEXT_PUBLIC_CONVERTER_URL}/convert`, form)
         .then((res) => {
           dispatch(
             updateConvertedIconsUrl({
@@ -67,7 +59,6 @@ const ExportButton = ({
         .catch((e) => {
           console.log(e);
         });
-      // downloadImage(dataURL);
     } else {
       console.error(
         "Element with id 'PlayGroundParent' not found or not an HTMLElement."

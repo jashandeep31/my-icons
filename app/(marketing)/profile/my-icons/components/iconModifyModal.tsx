@@ -2,6 +2,7 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { baseUrl } from "@/lib/axiosConfig";
 import { cn } from "@/lib/utils";
@@ -12,7 +13,6 @@ import axios from "axios";
 import { X } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Label } from "react-konva";
 import * as z from "zod";
 
 const formSchema = z.object({

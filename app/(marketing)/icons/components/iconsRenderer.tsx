@@ -27,7 +27,10 @@ const IconsRenderer = () => {
       },
       initialPageParam: 1,
       getNextPageParam: (lastPage: any, pages) => {
-        return lastPage.length >= 24 ? pages.length + 1 : undefined;
+        if (lastPage) {
+          return lastPage.length >= 24 ? pages.length + 1 : undefined;
+        }
+        return undefined;
       },
     });
 
@@ -46,21 +49,22 @@ const IconsRenderer = () => {
           {data
             ? data.pages.map((page: iconTypes[], index: number) => (
                 <React.Fragment key={index}>
-                  {page.map((icon, index) => {
-                    if (page.length === index + 1) {
-                      return (
-                        <div key={icon.id} ref={ref}>
-                          <IconCard icon={icon} />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div key={icon.id}>
-                          <IconCard icon={icon} />
-                        </div>
-                      );
-                    }
-                  })}
+                  {page &&
+                    page.map((icon, index) => {
+                      if (page.length === index + 1) {
+                        return (
+                          <div key={icon.id} ref={ref}>
+                            <IconCard icon={icon} />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={icon.id}>
+                            <IconCard icon={icon} />
+                          </div>
+                        );
+                      }
+                    })}
                 </React.Fragment>
               ))
             : null}

@@ -58,7 +58,7 @@ attrib +r "%cd%"
     if (iconModalConfig.active) {
       axios
         .get(`${baseUrl}/icons/get/${iconModalConfig.id}`)
-        .then(async (res) => {
+        .then((res) => {
           if (res.status === 200) {
             setIconData(res.data.data.icon);
           }
