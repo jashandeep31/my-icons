@@ -17,31 +17,33 @@ const FormDataSchema = z.object({
 export const dynamic = "force-dynamic";
 
 export const GET = catchAsync(async (req: Request) => {
-  const { searchParams } = new URL(req.url);
-  let page = searchParams.get("page") ? searchParams.get("page") : 1;
-  page = !isNaN(Number(page)) ? Number(page) : 1;
+  // const { searchParams } = new URL(req.url);
+  // let page = searchParams.get("page") ? searchParams.get("page") : 1;
+  // page = !isNaN(Number(page)) ? Number(page) : 1;
 
-  let platform = searchParams.get("platform")
-    ? searchParams.get("platform")?.toUpperCase().trim()
-    : "all";
+  // let platform = searchParams.get("platform")
+  //   ? searchParams.get("platform")?.toUpperCase().trim()
+  //   : "all";
 
-  const where: {
-    public: true;
-    platform?: "MACOS" | "OTHER" | "WINDOWS";
-  } = {
-    public: true,
-  };
-  if (platform === "MACOS" || platform === "OTHER" || platform === "WINDOWS") {
-    where["platform"] = platform;
-  }
+  // const where: {
+  //   public: true;
+  //   platform?: "MACOS" | "OTHER" | "WINDOWS";
+  // } = {
+  //   public: true,
+  // };
+  // if (platform === "MACOS" || platform === "OTHER" || platform === "WINDOWS") {
+  //   where["platform"] = platform;
+  // }
 
   const icons = await db.icon.findMany({
-    where,
+    where: {
+      public: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
-    skip: (page - 1) * 24,
-    take: 24,
+    // skip: (page - 1) * 24,
+    // take: 24,
   });
 
   return NextResponse.json({ icons }, { status: 200 });
