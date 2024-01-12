@@ -45,7 +45,7 @@ const IconsRenderer = () => {
     <div>
       <h1 className="text-lg font-bold">Icons</h1>
       <div className="mt-6">
-        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-1 gap-6">
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-6">
           {data
             ? data.pages.map((page: iconTypes[], index: number) => (
                 <React.Fragment key={index}>

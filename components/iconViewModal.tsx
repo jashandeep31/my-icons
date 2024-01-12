@@ -149,7 +149,7 @@ attrib +r "%cd%"
               </button>
             </div>
           </div>
-          <div className="h-full flex flex-col  py-12 justify-between">
+          <div className="h-full flex flex-col  py-12 justify-between gap-6">
             <div>
               <h1 className="text-xl font-bold">{iconData.name}</h1>
               <p className="text-sm text-foreground underline">
