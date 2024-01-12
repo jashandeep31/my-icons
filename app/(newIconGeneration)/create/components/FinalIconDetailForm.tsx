@@ -44,14 +44,29 @@ const FinalIconDetailForm = ({
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const form = new FormData();
-    form.append("name", data.name);
-    form.append("platform", data.platform);
-    form.append("pngURL", convertedIconsConfig.pngURL);
-    form.append("public", publicStatus.toString());
-
     try {
-      const res = await axios.post(`${baseUrl}/icon`, form);
+      // conversion of base64 to blog to send the server
+      const byteCharacters = atob(convertedIconsConfig.pngURL.split(",")[1]);
+      const byteArrays = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteArrays[i] = byteCharacters.charCodeAt(i);
+      }
+      const pngblob = new Blob([new Uint8Array(byteArrays)], {
+        type: "image/jpeg",
+      });
+      const form = new FormData();
+      form.append("png", pngblob);
+      const { data: imagesRes } = await axios.post(
+        `${process.env.NEXT_PUBLIC_CONVERTER_URL}/api/v1/convertor?api=${process.env.NEXT_PUBLIC_CONVERTER_API}`,
+        form
+      );
+      const res = await axios.post(`${baseUrl}/icon`, {
+        name: data.name,
+        platform: data.platform,
+        public: data.public,
+        pngURL: imagesRes.pngURL,
+        icoURL: imagesRes.icoURL,
+      });
       router.push(`/icon/${res.data.icon.id}`);
     } catch (error: any) {
       console.log(error.response);

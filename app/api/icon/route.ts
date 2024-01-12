@@ -11,7 +11,8 @@ const FormDataSchema = z.object({
   name: z.string().min(3, "Name is required atleast 3 char"),
   platform: z.enum(["MACOS", "WINDOWS", "OTHER"]),
   public: z.boolean(),
-  pngURL: z.string(),
+  pngURL: z.string().min(3, "Name is required atleast 3 char"),
+  icoURL: z.string().min(3, "Name is required atleast 3 char"),
 });
 
 export const POST = catchAsync(async (req: Request) => {
@@ -20,13 +21,14 @@ export const POST = catchAsync(async (req: Request) => {
     throw new AppError("Login is required", 401);
   }
 
-  const formData = await req.formData();
-
+  const data: any = await req.json();
+  console.log(data);
   const validatedForm = FormDataSchema.safeParse({
-    name: formData.get("name"),
-    platform: formData.get("platform"),
-    pngURL: formData.get("pngURL"), // always in base64
-    public: Boolean(formData.get("public")),
+    name: data.name,
+    platform: data.platform,
+    public: Boolean(data.public),
+    pngURL: data.pngURL,
+    icoURL: data.icoURL,
   });
 
   if (!validatedForm.success) {
@@ -34,32 +36,6 @@ export const POST = catchAsync(async (req: Request) => {
   }
   const validatedFormData = validatedForm.data;
 
-  // conversion of base64 to blog to send the server
-  const byteCharacters = atob(validatedFormData.pngURL.split(",")[1]);
-  const byteArrays = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteArrays[i] = byteCharacters.charCodeAt(i);
-  }
-  const pngblob = new Blob([new Uint8Array(byteArrays)], {
-    type: "image/jpeg",
-  });
-
-  // getting image conversion
-  const form = new FormData();
-  form.append("png", pngblob);
-  const convertedURL = async () => {
-    try {
-      const res = await axios.post(
-        `${process.env.CONVERTER_URL}/api/v1/convertor?api=${process.env.CONVERTER_API}`,
-        form
-      );
-      return res.data as { pngURL: string; icoURL: string };
-    } catch (e) {
-      throw new AppError("Something went wrong", 500);
-    }
-  };
-
-  const compressed = await convertedURL();
   async function fetchAndConvertImage(url: string) {
     const response = await fetch(`${process.env.CONVERTER_URL}/${url}`);
     const blob = await response.blob();
@@ -68,8 +44,8 @@ export const POST = catchAsync(async (req: Request) => {
   }
 
   const [icoBuffer, pngBuffer] = await Promise.all([
-    fetchAndConvertImage(compressed.icoURL),
-    fetchAndConvertImage(compressed.pngURL),
+    fetchAndConvertImage(validatedFormData.icoURL),
+    fetchAndConvertImage(validatedFormData.pngURL),
   ]);
 
   const slugifiedName = slugify(validatedFormData.name, {
