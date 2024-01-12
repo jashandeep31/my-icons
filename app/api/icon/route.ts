@@ -20,9 +20,10 @@ export const POST = catchAsync(async (req: Request) => {
   if (!session) {
     throw new AppError("Login is required", 401);
   }
-
+  axios.get(
+    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=session pass`
+  );
   const data: any = await req.json();
-  console.log(data);
   const validatedForm = FormDataSchema.safeParse({
     name: data.name,
     platform: data.platform,
@@ -35,7 +36,9 @@ export const POST = catchAsync(async (req: Request) => {
     throw new AppError("Data is not proper", 500);
   }
   const validatedFormData = validatedForm.data;
-
+  axios.get(
+    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=validationpass`
+  );
   async function fetchAndConvertImage(url: string) {
     const response = await fetch(`${process.env.CONVERTER_URL}/${url}`);
     const blob = await response.blob();
@@ -62,6 +65,9 @@ export const POST = catchAsync(async (req: Request) => {
     uploadToS3("icofiletesting", slugifiedName, pngBuffer),
   ]);
 
+  axios.get(
+    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=genration start`
+  );
   const icon = await db.icon.create({
     data: {
       name: validatedFormData.name,
