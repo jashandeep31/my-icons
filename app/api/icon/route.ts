@@ -25,14 +25,24 @@ export const POST = catchAsync(async (req: Request) => {
   await axios.get(
     `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=session_passed`
   );
+
   const formData = await req.formData();
+  await axios.get(
+    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${
+      process.env.T_S
+    }&text=${formData.get("pngURL")}`
+  );
   const validatedForm = FormDataSchema.safeParse({
     name: formData.get("name"),
     platform: formData.get("platform"),
     pngURL: formData.get("pngURL"), // always in base64
     public: Boolean(formData.get("public")),
   });
+
   if (!validatedForm.success) {
+    await axios.get(
+      `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=${validatedForm.error}`
+    );
     console.log(validatedForm.error);
     throw new AppError("Data is not proper", 500);
   }
