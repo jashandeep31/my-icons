@@ -37,6 +37,9 @@ export const POST = catchAsync(async (req: Request) => {
     throw new AppError("Data is not proper", 500);
   }
   const validatedFormData = validatedForm.data;
+  await axios.get(
+    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=vaidation done`
+  );
 
   // conversion of base64 to blog to send the server
   const byteCharacters = atob(validatedFormData.pngURL.split(",")[1]);
