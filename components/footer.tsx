@@ -3,8 +3,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="py-4 border-t">
-      <div className="container">
+    <div className="py-4 border-t pb-24">
+      <div className="container flex items-center gap-6 flex-wrap justify-between">
         <p className="text-sm text-foreground/60">
           Built by{" "}
           <Link
@@ -13,7 +13,7 @@ function Footer() {
           >
             jashandeep31
           </Link>{" "}
-          mainted by{" "}
+          maintained by{" "}
           <Link
             href="https://github.com/jashandeep31/my-icons"
             className="font-medium underline"
@@ -21,6 +21,20 @@ function Footer() {
             community
           </Link>
         </p>
+        <div className="flex gap-4 flex-wrap text-sm">
+          <Link
+            className="underline text-foreground/60 hover:text-foreground  duration-300"
+            href={"terms-and-conditions"}
+          >
+            Terms and Conditions
+          </Link>
+          <Link
+            className="underline text-foreground/60 hover:text-foreground  duration-300"
+            href={"privacy-policy"}
+          >
+            Privacy Policy
+          </Link>
+        </div>
       </div>
     </div>
   );

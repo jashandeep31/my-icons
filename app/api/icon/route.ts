@@ -42,6 +42,7 @@ export const POST = catchAsync(async (req: Request) => {
     type: "image/jpeg",
   });
 
+  console.log("working till here");
   // getting image conversion
   const form = new FormData();
   form.append("png", pngblob);

@@ -20,7 +20,7 @@ const Navbar = async () => {
             <DesktopNavMenu />
           </div>
 
-          <div className="md:flex hidden">
+          <div className="md:flex hidden gap-6">
             {session ? (
               <Link
                 href="/profile"

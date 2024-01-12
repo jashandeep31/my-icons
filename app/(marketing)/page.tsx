@@ -1,4 +1,3 @@
-import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -50,10 +49,9 @@ export default async function page() {
               buttonVariants({ variant: "outline", size: "sm" }),
               "flex gap-2"
             )}
-            href="https://github.com/jashandeep31/my-icons"
+            href="/create"
           >
-            <Icons.gitHub width={15} />
-            Github
+            Create Your Icon
           </Link>
         </div>
       </div>

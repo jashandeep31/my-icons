@@ -12,11 +12,11 @@ export const MainMenuConfig = [
     path: "/create",
   },
   {
-    name: "About",
-    path: "/about",
+    name: "Github",
+    path: "https://github.com/jashandeep31/my-icons",
   },
   {
-    name: "Contact",
-    path: "/contact",
+    name: "Contact Us",
+    path: "/contact-us",
   },
 ];

@@ -31,6 +31,7 @@ const IconModifyModal = ({
   icon: iconTypes;
   refetch: any;
 }) => {
+  const [publicStatus, setPublicStatus] = useState<boolean>(icon.public);
   const ref = useClickAway<HTMLDivElement>(() => {
     setIconEditModal(false);
   });
@@ -58,12 +59,13 @@ const IconModifyModal = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: icon.name,
-      public: icon.public,
+      public: Boolean(icon.public),
     },
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      data.public = publicStatus;
       const res = await axios.patch(`${baseUrl}/icon/${id}`, data);
       refetch();
       toast({
@@ -108,8 +110,10 @@ const IconModifyModal = ({
             <div className="flex items-center space-x-2 mt-4">
               <Checkbox
                 id="terms"
-                checked={form.getValues("public")}
-                onCheckedChange={(e: boolean) => form.setValue("public", e)}
+                checked={publicStatus}
+                onCheckedChange={(e: boolean) => {
+                  setPublicStatus(e);
+                }}
               />
               <label
                 htmlFor="terms"

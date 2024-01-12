@@ -11,7 +11,7 @@ import { useClickAway } from "@uidotdev/usehooks";
 import axios from "axios";
 import { Loader2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import * as z from "zod";
@@ -32,6 +32,8 @@ const FinalIconDetailForm = ({
   });
   const router = useRouter();
 
+  const [publicStatus, setPublicStatus] = useState<boolean>(true);
+
   const convertedIconsConfig = useSelector(selectConvertedIconsConfig);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,7 +48,7 @@ const FinalIconDetailForm = ({
     form.append("name", data.name);
     form.append("platform", data.platform);
     form.append("pngURL", convertedIconsConfig.pngURL);
-    form.append("public", data.public.toString());
+    form.append("public", publicStatus.toString());
 
     try {
       const res = await axios.post(`${baseUrl}/icon`, form);
@@ -120,8 +122,8 @@ const FinalIconDetailForm = ({
             <div className="flex items-center space-x-2 mt-4">
               <Checkbox
                 id="terms"
-                checked={form.getValues("public")}
-                onCheckedChange={(e: boolean) => form.setValue("public", e)}
+                checked={publicStatus}
+                onCheckedChange={(e: boolean) => setPublicStatus(e)}
               />
               <label
                 htmlFor="terms"

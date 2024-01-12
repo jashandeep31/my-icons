@@ -14,6 +14,7 @@ import {
   updateIconsArrayIconLocked,
   updateIconsArrayIconVisible,
 } from "@/store/features/playground/iconsArraySlice";
+import Image from "next/image";
 
 const SidebarTopControls = ({
   setBaseIconModalState,
@@ -87,7 +88,15 @@ const SidebarTopControls = ({
             key={index}
             className="flex w-full justify-between text-foreground/60 border-b py-2"
           >
-            <span className="flex gap-1 items-center ">Layer {item.id}</span>
+            <span className="flex gap-1 items-center ">
+              {" "}
+              <Image
+                src={item.base64}
+                width={10}
+                height={10}
+                alt=""
+              /> Layer {item.id}
+            </span>
             <span className="flex gap-2">
               <button
                 onClick={() => dispatch(removeIconsArrayIcon({ id: item.id }))}
@@ -140,7 +149,7 @@ const SidebarTopControls = ({
       >
         <input {...getInputProps()} />
         <p className="text-sm text-foreground/60 ">
-          Drag and drop here, or paste files, or click to select files
+          Drag and drop here or click to select files
         </p>
       </div>
     </div>
