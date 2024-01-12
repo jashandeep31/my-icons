@@ -34,9 +34,9 @@ const BaseIconChoiceModal = ({
     queryFn: async () => await getBaseIcons(),
   });
   return (
-    <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10">
+    <div className=" h-screen w-full  bg-[#000000df] fixed top-0 left-0 flex items-center justify-center z-10">
       <div
-        className="border flex flex-col bg-white rounded-md shadow w-3/4 h-3/4 p-4"
+        className="border flex flex-col bg-background rounded-md shadow w-3/4 h-3/4 p-4"
         ref={ref}
       >
         <div className="flex justify-between items-center">

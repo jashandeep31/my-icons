@@ -78,21 +78,21 @@ attrib +r "%cd%"
     return (
       <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
         <div
-          className="rounded-md bg-white md:w-3/4 w-full h-3/4 grid md:grid-cols-2 p-12 gap-6"
+          className="rounded-md bg-background md:w-3/4 w-full h-3/4 grid md:grid-cols-2 p-12 gap-6"
           ref={ref}
         >
-          <div className="w-full h-full animate-pulse rounded-md bg-slate-200 "></div>
+          <div className="w-full h-full animate-pulse rounded-md bg-muted "></div>
           <div className="flex justify-between py-12 flex-col">
             <div>
-              <div className="h-6 bg-slate-200 rounded"></div>
-              <div className="h-2 mt-3  bg-slate-200 rounded w-1/3"></div>
+              <div className="h-6 bg-muted rounded"></div>
+              <div className="h-2 mt-3  bg-muted rounded w-1/3"></div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div className="bg-slate-200 rounded h-12 w-full"></div>
-              <div className="bg-slate-200 rounded h-12 w-full"></div>
+              <div className="bg-muted rounded h-12 w-full"></div>
+              <div className="bg-muted rounded h-12 w-full"></div>
             </div>
             <div>
-              <div className="h-3 bg-slate-200 rounded"></div>
+              <div className="h-3 bg-muted rounded"></div>
             </div>
           </div>
         </div>
@@ -101,8 +101,11 @@ attrib +r "%cd%"
   }
 
   return (
-    <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
-      <div className="rounded-md bg-white md:w-3/4 w-full " ref={ref}>
+    <div className=" h-screen w-full  bg-[#000000dd] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
+      <div
+        className="rounded-md bg-background border-2 md:w-3/4 w-full "
+        ref={ref}
+      >
         <div className="flex border-b justify-between items-center p-4">
           <h3 className="text-lg font-semibold leading-none tracking-tight">
             Get Your Icon{" "}
@@ -134,7 +137,9 @@ attrib +r "%cd%"
               <button
                 onClick={() => setViewOf("png")}
                 className={`${
-                  viewOf === "png" ? "bg-white shadow" : ""
+                  viewOf === "png"
+                    ? "bg-primary text-primary-foreground shadow"
+                    : ""
                 } rounded w-full text-sm p-2 text-foreground/60 `}
               >
                 PNG
@@ -142,7 +147,9 @@ attrib +r "%cd%"
               <button
                 onClick={() => setViewOf("ico")}
                 className={`${
-                  viewOf === "ico" ? "bg-white shadow" : ""
+                  viewOf === "ico"
+                    ? "bg-primary text-primary-foreground shadow"
+                    : ""
                 } rounded w-full text-sm p-2 text-foreground/60 `}
               >
                 ICO
@@ -183,7 +190,7 @@ attrib +r "%cd%"
                 </p>
                 <button
                   onClick={copyCommand}
-                  className="hover:bg-white rounded p-1 hover:text-black duration-300"
+                  className="hover:bg-primary rounded p-1 hover:text-black duration-300"
                 >
                   {!messageCopied ? (
                     <Copy width={12} height={12} />

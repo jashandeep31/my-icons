@@ -14,7 +14,7 @@ const IconCard = ({ icon }: { icon: iconTypes }) => {
       }
     >
       <Image src={icon.pngURL} width={250} height={250} alt="" />
-      <p className="text-xs text-foreground/60 bg-white rounded-full px-2  py-1 inline-block ">
+      <p className="text-xs text-foreground/60 bg-background rounded-full px-2  py-1 inline-block ">
         {icon.name}
       </p>
     </div>

@@ -74,8 +74,8 @@ const FinalIconDetailForm = ({
   }
 
   return (
-    <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10">
-      <div className="bg-white  rounded    md:w-2/4" ref={ref}>
+    <div className=" h-screen w-full  bg-[#000000db] fixed top-0 left-0 flex items-center justify-center z-10">
+      <div className="bg-background  rounded    border-2 md:w-2/4" ref={ref}>
         <div className="flex justify-between items-center p-4 ">
           <h2 className="text-lg font-bold  ">Final Form</h2>
           <button

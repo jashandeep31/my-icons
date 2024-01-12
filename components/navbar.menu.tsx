@@ -35,7 +35,7 @@ const NavbarMenu = ({
     <div
       className={` ${
         !mobileMenuStatus ? "border-b" : null
-      }  bg-white   relative flex-col flex items-center`}
+      }  bg-background   relative flex-col flex items-center`}
       ref={ref}
     >
       <div className="container min-h-16  flex justify-between items-center">
@@ -65,7 +65,12 @@ const NavbarMenu = ({
               )}
             </Link>
           ) : (
-            <Link href="/login" className={cn(buttonVariants({ size: "sm" }))}>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ size: "sm", variant: "secondary" })
+              )}
+            >
               Login
             </Link>
           )}
@@ -86,7 +91,7 @@ const NavbarMenu = ({
       <div
         className={`w-full ${
           mobileMenuStatus ? "block absolute top-16 border-b pb-3" : "hidden"
-        } container mt-3  bg-white`}
+        } container mt-3  bg-background`}
       >
         <nav>
           {MainMenuConfig.map((link, index) => (

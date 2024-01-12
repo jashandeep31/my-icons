@@ -81,8 +81,11 @@ const IconModifyModal = ({
   };
 
   return (
-    <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10">
-      <div className=" mx-4 w-full md:w-1/4 rounded-md bg-white " ref={ref}>
+    <div className=" h-screen w-full  bg-[#000000d0] fixed top-0 left-0 flex items-center justify-center z-10">
+      <div
+        className=" mx-4 w-full md:w-1/4 rounded-md bg-background border-2 "
+        ref={ref}
+      >
         <div className="flex justify-between items-center p-4">
           <h3 className="text-lg font-semibold leading-none tracking-tight">
             Edit Icon

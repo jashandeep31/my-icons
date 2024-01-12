@@ -40,7 +40,7 @@ attrib +r "%cd%"
         <p className="text-foreground/60 font-medium">cmd for windows</p>
         <button
           onClick={copyCommand}
-          className="hover:bg-white rounded p-1 hover:text-black duration-300"
+          className="hover:bg-primary rounded p-1 hover:text-black duration-300"
         >
           {!messageCopied ? (
             <Copy width={12} height={12} />

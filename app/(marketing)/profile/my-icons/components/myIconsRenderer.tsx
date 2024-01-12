@@ -73,7 +73,7 @@ const MyIconsRenderer = () => {
                     />
                     <div className="flex flex-wrap justify-between items-center">
                       <div>
-                        <p className="text-xs bg-white px-2 py-1 rounded-full inline-block">
+                        <p className="text-xs bg-background px-2 py-1 rounded-full inline-block">
                           {icon.name}
                         </p>
                       </div>
@@ -83,7 +83,7 @@ const MyIconsRenderer = () => {
                           setIconEditModalId(icon.id);
                           setIconDetail(icon);
                         }}
-                        className="p-1 hover:bg-white duration-300 rounded"
+                        className="p-1 hover:bg-background duration-300 rounded"
                       >
                         <Pencil width={15} height={15} />
                       </button>

@@ -10,7 +10,7 @@ const AuthComponentLoginSignup = () => {
     <div className="mt-6 flex flex-col gap-4 ">
       <button
         className={cn(
-          buttonVariants({ variant: "outline" }),
+          buttonVariants({ variant: "secondary" }),
           "w-full flex items-center justify-center gap-2"
         )}
         onClick={() => signIn("github", { redirect: true, callbackUrl: "/" })}
@@ -20,7 +20,7 @@ const AuthComponentLoginSignup = () => {
       </button>
       <button
         className={cn(
-          buttonVariants({ variant: "outline" }),
+          buttonVariants({ variant: "secondary" }),
           "w-full flex items-center justify-center gap-2"
         )}
         onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}

@@ -47,7 +47,7 @@ const CreateIcon = () => {
           </div>
           <div className="bg-muted col-span-4 flex items-center justify-center">
             <div>
-              <div className="bg-white">
+              <div className="bg-background">
                 <PlayGround />
               </div>
             </div>

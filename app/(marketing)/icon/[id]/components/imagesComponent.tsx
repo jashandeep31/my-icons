@@ -25,7 +25,7 @@ const ImagesComponent = ({
         <button
           onClick={() => setViewOf("png")}
           className={`${
-            viewOf === "png" ? "bg-white shadow" : ""
+            viewOf === "png" ? "bg-background text-foreground shadow" : ""
           } rounded w-full text-sm p-2 text-foreground/60 `}
         >
           PNG
@@ -33,7 +33,7 @@ const ImagesComponent = ({
         <button
           onClick={() => setViewOf("ico")}
           className={`${
-            viewOf === "ico" ? "bg-white shadow" : ""
+            viewOf === "ico" ? "bg-background text-foreground shadow" : ""
           } rounded w-full text-sm p-2 text-foreground/60 `}
         >
           ICO
