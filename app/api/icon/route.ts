@@ -15,16 +15,10 @@ const FormDataSchema = z.object({
 });
 
 export const POST = catchAsync(async (req: Request) => {
-  await axios.get(
-    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=request_in`
-  );
   const session = await getCurrentUser();
   if (!session) {
     throw new AppError("Login is required", 401);
   }
-  await axios.get(
-    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=session_passed`
-  );
   const formData = await req.formData();
   const validatedForm = FormDataSchema.safeParse({
     name: formData.get("name"),
@@ -48,9 +42,6 @@ export const POST = catchAsync(async (req: Request) => {
     type: "image/jpeg",
   });
 
-  await axios.get(
-    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=validation done`
-  );
   // getting image conversion
   const form = new FormData();
   form.append("png", pngblob);
@@ -79,9 +70,6 @@ export const POST = catchAsync(async (req: Request) => {
     fetchAndConvertImage(compressed.pngURL),
   ]);
 
-  await axios.get(
-    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=stage 1`
-  );
   const slugifiedName = slugify(validatedFormData.name, {
     replacement: "-",
     remove: undefined,
@@ -95,10 +83,6 @@ export const POST = catchAsync(async (req: Request) => {
     uploadToS3("icofiletesting", slugifiedName, icoBuffer),
     uploadToS3("icofiletesting", slugifiedName, pngBuffer),
   ]);
-
-  await axios.get(
-    `https://api.telegram.org/${process.env.T_T}/sendMessage?chat_id=-${process.env.T_S}&text=stage-2`
-  );
 
   const icon = await db.icon.create({
     data: {
