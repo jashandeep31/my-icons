@@ -70,7 +70,7 @@ const IconsRenderer = () => {
     if (!initialQueryHandler.current) {
       const delayDebounceFn = setTimeout(() => {
         refetch();
-      }, 500);
+      }, 1000);
 
       return () => clearTimeout(delayDebounceFn);
     } else if (query !== "") {
@@ -90,7 +90,7 @@ const IconsRenderer = () => {
             placeholder="Photoshop"
           />
           <Button size={"sm"} variant={"secondary"}>
-            <Search width={15} height={15} />
+            <Search width={15} height={15} onClick={() => refetch()} />
           </Button>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import LayoutClient from "./layout.client";
 import Script from "next/script";
 import { siteConfig } from "@/config/siteConfig";
+import { ThemeProvider } from "./theme.provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -34,14 +35,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <LayoutClient>
-          <StoreProvider>
-            <Toaster />
-            {children}
-          </StoreProvider>
-        </LayoutClient>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LayoutClient>
+            <StoreProvider>
+              <Toaster />
+              {children}
+            </StoreProvider>
+          </LayoutClient>
+        </ThemeProvider>
       </body>
     </html>
   );
