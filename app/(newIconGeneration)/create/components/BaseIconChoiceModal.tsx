@@ -40,7 +40,8 @@ const BaseIconChoiceModal = ({
         ref={ref}
       >
         <div className="flex justify-between items-center">
-          <div className="flex ">
+          {/* TODO: pending to add this function */}
+          <div className="hidden">
             <button
               className={cn(
                 buttonVariants({
