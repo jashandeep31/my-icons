@@ -101,7 +101,7 @@ attrib +r "%cd%"
   }
 
   return (
-    <div className=" h-screen w-full  bg-[#000000dd] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
+    <div className=" h-screen w-full  bg-black/80  fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
       <div
         className="rounded-md bg-background border-2 md:w-3/4 w-full "
         ref={ref}

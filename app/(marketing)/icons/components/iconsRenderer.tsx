@@ -1,39 +1,58 @@
 "use client";
 import IconCard from "@/components/iconCard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { baseUrl } from "@/lib/axiosConfig";
 import { iconTypes } from "@/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useEffect } from "react";
+import { Search } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const IconsRenderer = () => {
+  const [platform, setPlatform] = useState<
+    "ALL" | "WINDOWS" | "MACOS" | "OTHER" | ""
+  >("");
+  const [query, setQuery] = useState<string>("");
+  const initialQueryHandler = useRef<boolean>(true);
+
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
   const fetchIcons = async (pageParams: any) => {
     try {
-      const res = await axios.get(`${baseUrl}/icons?page=${pageParams}`);
+      const res = await axios.get(
+        `${baseUrl}/icons?page=${pageParams}&platform=${platform}&q=${query}`
+      );
       return res.data.icons;
     } catch (e) {}
   };
 
   // TODO: read the bookmark from the x.com
-  const { data, isFetched, isFetching, hasNextPage, isError, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ["allIconsQuery"],
-      queryFn: async ({ pageParam }) => {
-        return await fetchIcons(pageParam);
-      },
-      initialPageParam: 1,
-      getNextPageParam: (lastPage: any, pages) => {
-        if (lastPage) {
-          return lastPage.length >= 24 ? pages.length + 1 : undefined;
-        }
-        return undefined;
-      },
-    });
-
+  const {
+    data,
+    isFetched,
+    isFetching,
+    hasNextPage,
+    isError,
+    fetchNextPage,
+    refetch,
+  } = useInfiniteQuery({
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    queryKey: ["allIconsQuery"],
+    queryFn: async ({ pageParam }) => {
+      return await fetchIcons(pageParam);
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: any, pages) => {
+      if (lastPage) {
+        return lastPage.length >= 24 ? pages.length + 1 : undefined;
+      }
+      return undefined;
+    },
+  });
   useEffect(() => {
     if (inView) {
       fetchNextPage();
@@ -41,10 +60,76 @@ const IconsRenderer = () => {
     return () => {};
   }, [inView]);
 
+  useEffect(() => {
+    if (platform !== "") {
+      refetch();
+    }
+  }, [platform]);
+
+  useEffect(() => {
+    if (!initialQueryHandler.current) {
+      const delayDebounceFn = setTimeout(() => {
+        refetch();
+      }, 500);
+
+      return () => clearTimeout(delayDebounceFn);
+    } else if (query !== "") {
+      initialQueryHandler.current = false;
+      refetch();
+    }
+  }, [query]);
+
   return (
     <div>
-      <h1 className="text-lg font-bold">Icons</h1>
-      <div className="mt-6">
+      <div className="flex justify-between">
+        <h1 className="text-lg font-bold hidden md:block">Icons</h1>
+        <div className="flex gap-2">
+          <Input
+            type="text"
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Photoshop"
+          />
+          <Button size={"sm"} variant={"secondary"}>
+            <Search width={15} height={15} />
+          </Button>
+        </div>
+      </div>
+
+      <div className="flex gap-2 mt-4">
+        <button
+          onClick={() => {
+            setPlatform("ALL");
+          }}
+          className={` text-sm  hover:text-foreground duration-300 ${
+            platform === "ALL" || platform === ""
+              ? "underline text-foreground"
+              : "text-foreground/60"
+          }`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => setPlatform("WINDOWS")}
+          className={` ${
+            platform === "WINDOWS"
+              ? "underline text-foreground"
+              : "text-foreground/60"
+          } text-sm  hover:text-foreground duration-300`}
+        >
+          Windows
+        </button>
+        <button
+          onClick={() => setPlatform("MACOS")}
+          className={` ${
+            platform === "MACOS"
+              ? "underline text-foreground"
+              : "text-foreground/60"
+          } text-sm  hover:text-foreground duration-300`}
+        >
+          Mac Os
+        </button>
+      </div>
+      <div className="mt-3">
         <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-6">
           {data
             ? data.pages.map((page: iconTypes[], index: number) => (
