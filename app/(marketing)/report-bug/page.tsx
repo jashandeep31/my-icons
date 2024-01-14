@@ -65,7 +65,7 @@ const ReportBug = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-8"
+            className="space-y-8 mt-8"
           >
             <FormField
               control={form.control}
@@ -93,7 +93,7 @@ const ReportBug = () => {
                 </FormItem>
               )}
             />
-            <div className="grid w-full gap-1.5">
+            <div className="grid w-full gap-1.5 ">
               <Label
                 className={`${
                   form.formState.errors.message ? "text-red-900" : ""

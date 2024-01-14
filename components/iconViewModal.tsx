@@ -73,7 +73,7 @@ attrib +r "%cd%"
           setLoading(false);
         })
         .catch((e) => {
-          console.log(e);
+          toast.error("Failed to get Icon details");
         });
       return () => {
         setLoading(true);
