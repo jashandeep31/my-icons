@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/store/StoreProvider";
 import LayoutClient from "./layoutClient";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/config/siteConfig";
 import { ThemeProvider } from "./theme.provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -61,6 +61,7 @@ export default function RootLayout({
                 <Bug width={15} height={15} />
                 Report Bug
               </Link>
+              <Analytics />
             </StoreProvider>
           </LayoutClient>
         </ThemeProvider>
