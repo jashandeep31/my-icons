@@ -26,10 +26,10 @@ export default async function page() {
     <div className="container md:mt-24 mt-6">
       <div className=" flex flex-col items-center">
         <p className="text-foreground p-2 text-sm rounded bg-muted ">
-          Icon library by the community, for the community
+          Icon library by the community
         </p>
-        <h1 className="text-6xl my-3 font-bold">My Icons</h1>
-        <p className="text-lg font-medium text-foreground/60">
+        <h1 className="md:text-6xl text-5xl my-3 font-bold">My Icons</h1>
+        <p className="md:text-lg text-base text-center font-medium text-foreground/60">
           Customize your icons according to your preferences. Your computer,
           your icons.
         </p>

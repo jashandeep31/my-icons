@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/store/StoreProvider";
-import { Toaster } from "@/components/ui/toaster";
 import LayoutClient from "./layoutClient";
 import Script from "next/script";
 import { siteConfig } from "@/config/siteConfig";
 import { ThemeProvider } from "./theme.provider";
+import { Toaster } from "@/components/ui/sonner";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Bug } from "lucide-react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -47,6 +51,16 @@ export default function RootLayout({
             <StoreProvider>
               <Toaster />
               {children}
+              <Link
+                className={cn(
+                  buttonVariants(),
+                  "fixed right-10 bottom-10 flex gap-2 items-center"
+                )}
+                href={"/report-bug"}
+              >
+                <Bug width={15} height={15} />
+                Report Bug
+              </Link>
             </StoreProvider>
           </LayoutClient>
         </ThemeProvider>

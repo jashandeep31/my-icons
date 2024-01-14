@@ -4,7 +4,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="py-4 border-t">
-      <div className="container flex items-center gap-6 flex-wrap justify-between">
+      <div className="container flex items-center gap-6 flex-wrap justify-between pb-24">
         <p className="text-sm text-foreground/60 flex gap-2 md:flex-row flex-col">
           <span>
             Built by{" "}

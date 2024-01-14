@@ -13,7 +13,9 @@ import axios from "axios";
 import { baseUrl } from "@/lib/axiosConfig";
 import { iconTypes } from "@/types";
 import { useClickAway } from "@uidotdev/usehooks";
-import { toast } from "./ui/use-toast";
+import { platform } from "os";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const IconViewModal = () => {
   const iconModalConfig = useSelector(selectIconModalConfig);
@@ -22,12 +24,20 @@ const IconViewModal = () => {
   const [viewOf, setViewOf] = useState<"png" | "ico">("png");
   const [messageCopied, setMessageCopied] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const ref = useClickAway<HTMLDivElement>(() => {
     dispatch(updateIconModalState(false));
   });
 
+  const redirectFunction = (platform: string) => {
+    dispatch(updateIconModalState(false));
+    router.push(`/icons?platform=${platform}`);
+  };
+
   const copyCommand = () => {
+    const id = toast("Getting command");
+
     try {
       navigator.clipboard.writeText(`
 attrib -h -s "%cd%\\desktop.ini"
@@ -43,14 +53,12 @@ attrib +r "%cd%"
       `);
 
       setMessageCopied(true);
+      toast.success("Copied 🎉", { id });
       setTimeout(() => {
         setMessageCopied(false);
       }, 2000);
     } catch (e) {
-      toast({
-        title: "Copy failed",
-        variant: "destructive",
-      });
+      toast.error("Coping failed", { id });
     }
   };
 
@@ -159,8 +167,13 @@ attrib +r "%cd%"
           <div className="h-full flex flex-col  py-12 justify-between gap-6">
             <div>
               <h1 className="text-xl font-bold">{iconData.name}</h1>
-              <p className="text-sm text-foreground underline">
-                {iconData.platform}
+              <p className="text-sm text-foreground underline ">
+                <button
+                  className="underline"
+                  onClick={() => redirectFunction(iconData.platform)}
+                >
+                  {iconData.platform}
+                </button>
               </p>
             </div>
             <div className="grid grid-cols-2 gap-2 mt-4 ">

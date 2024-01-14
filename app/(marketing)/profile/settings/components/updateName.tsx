@@ -3,7 +3,7 @@ import React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "@/components/ui/use-toast";
+
 import { baseUrl } from "@/lib/axiosConfig";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 type session = {
   name: string;
 };
@@ -28,16 +29,12 @@ const UpdateName = ({ session }: { session: session }) => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const id = toast("Updating data");
     try {
       const res = await axios.patch(`${baseUrl}/user/`, data);
-      toast({
-        title: "Name is updated",
-      });
+      toast.success("Updated Successfully 🎉", { id });
     } catch (error) {
-      toast({
-        title: "Something went wrong",
-        variant: "destructive",
-      });
+      toast.error("Something went wrong", { id });
     }
   };
   return (

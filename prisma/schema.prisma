@@ -105,3 +105,20 @@ enum Paltform {
   MACOS
   OTHER
 }
+
+model BugReport {
+  id        String          @id @default(cuid())
+  email     String
+  message   String
+  name      String
+  fixed     Boolean         @default(false)
+  status    BugReportStatus @default(PENDING)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum BugReportStatus {
+  PENDING
+  WORKING
+  FIXED
+}

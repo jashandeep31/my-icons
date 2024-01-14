@@ -8,7 +8,7 @@ import {
   updateIconsArrayIconPosition,
   updateIconsArrayIconSize,
 } from "@/store/features/playground/iconsArraySlice";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 const IconRender = forwardRef(
   (
@@ -81,7 +81,9 @@ const IconRender = forwardRef(
           onMouseDown={(e) => {
             !icon.locked
               ? ref.current.nodes([e.currentTarget])
-              : toast({ title: `Layer ${icon.id} is locked` });
+              : toast.warning(`Icon layer ${icon.id}  is locked`, {
+                  description: `Unlock the layer ${icon.id}  to move around.`,
+                });
           }}
           width={sizeModified ? size.width : image?.width}
           height={sizeModified ? size.height : image?.height}

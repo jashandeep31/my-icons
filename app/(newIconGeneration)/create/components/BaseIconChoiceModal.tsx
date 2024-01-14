@@ -40,7 +40,8 @@ const BaseIconChoiceModal = ({
         ref={ref}
       >
         <div className="flex justify-between items-center">
-          <div className="flex ">
+          <h1 className="text-lg font-bold">Choose Base Icon</h1>
+          <div className="hidden ">
             <button
               className={cn(
                 buttonVariants({
@@ -85,7 +86,6 @@ const BaseIconChoiceModal = ({
             </button>
           </div>
         </div>
-        {/* TODO: make this scroll y */}
         <div className="mt-3 flex-1  ">
           <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-2 gap-6  ">
             {baseIconsQuery.isFetched && baseIconsQuery.data

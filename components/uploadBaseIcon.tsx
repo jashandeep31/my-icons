@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { baseUrl } from "@/lib/axiosConfig";
+import { toast } from "sonner";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -41,13 +41,7 @@ const UploadBaseIcon = () => {
     try {
       const res = await axios.post(`${baseUrl}/baseicons/upload`, formData);
     } catch (error: any) {
-      const errorMessage =
-        error?.response?.data?.error || "Something went wrong";
-
-      toast({
-        title: errorMessage,
-        variant: "destructive",
-      });
+      toast.error("Something went wrong");
     }
   }
   return (

@@ -1,19 +1,31 @@
 "use client";
 import IconCard from "@/components/iconCard";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { baseUrl } from "@/lib/axiosConfig";
+import { cn } from "@/lib/utils";
 import { iconTypes } from "@/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Search } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const IconsRenderer = () => {
+  const searchParams = useSearchParams();
+
   const [platform, setPlatform] = useState<
     "ALL" | "WINDOWS" | "MACOS" | "OTHER" | ""
-  >("");
+  >(
+    (searchParams.get("platform") as
+      | "ALL"
+      | "WINDOWS"
+      | "MACOS"
+      | "OTHER"
+      | "") ?? ""
+  );
   const [query, setQuery] = useState<string>("");
   const initialQueryHandler = useRef<boolean>(true);
 
@@ -22,8 +34,18 @@ const IconsRenderer = () => {
   });
   const fetchIcons = async (pageParams: any) => {
     try {
+      let verifiedPlatform: string = "";
+
+      if (
+        ["ALL", "WINDOWS", "MACOS", "OTHER", ""].includes(
+          platform.toUpperCase()
+        )
+      ) {
+        verifiedPlatform = platform.toUpperCase();
+      }
+
       const res = await axios.get(
-        `${baseUrl}/icons?page=${pageParams}&platform=${platform}&q=${query}`
+        `${baseUrl}/icons?page=${pageParams}&platform=${verifiedPlatform}&q=${query}`
       );
       return res.data.icons;
     } catch (e) {}
@@ -78,6 +100,7 @@ const IconsRenderer = () => {
     }
   }, [query]);
 
+  console.log(data?.pages.length);
   return (
     <div>
       <div className="flex justify-between">
@@ -161,6 +184,20 @@ const IconsRenderer = () => {
               ))
             : null}
         </div>
+        {!isFetching && data?.pages[0].length === 0 ? (
+          <div className="flex justify-center items-center flex-col py-12 w-full">
+            <h1 className="text-3xl font-bold">No Icons Found</h1>
+            <p className="text-lg text-primary/50 mt-3">
+              Don&apos;t worry create your own icon.{" "}
+            </p>
+            <Link
+              className={cn(buttonVariants({ variant: "secondary" }), "mt-8")}
+              href={"/create"}
+            >
+              Create Custom Icon
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   );

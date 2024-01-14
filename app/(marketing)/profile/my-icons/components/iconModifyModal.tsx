@@ -3,7 +3,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { baseUrl } from "@/lib/axiosConfig";
 import { cn } from "@/lib/utils";
 import { iconTypes } from "@/types";
@@ -37,21 +37,16 @@ const IconModifyModal = ({
   });
   const [processingDelete, setProcessingDelete] = useState(false);
   const sendDeleteRequest = async () => {
+    const toastId = toast("Verifying request");
     try {
       setProcessingDelete(true);
       const res = await axios.delete(`${baseUrl}/icon/${id}`);
-      console.log(res);
       refetch();
-      toast({
-        title: "Icon deleted",
-      });
+      toast.success("Icon deleted successfully", { id: toastId });
       setIconEditModal(false);
       setProcessingDelete(false);
     } catch (e) {
-      toast({
-        title: "Something went wrong",
-        variant: "destructive",
-      });
+      toast.error("Failed to delete Icon", { id: toastId });
     }
   };
 
@@ -64,19 +59,15 @@ const IconModifyModal = ({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const toastId = toast("Validating data");
     try {
       data.public = publicStatus;
       const res = await axios.patch(`${baseUrl}/icon/${id}`, data);
       refetch();
-      toast({
-        title: "Icon Updated",
-      });
+      toast.success("Icon data updated", { id: toastId });
       setIconEditModal(false);
     } catch (e) {
-      toast({
-        title: "Something went wrong",
-        variant: "destructive",
-      });
+      toast.error("", { id: toastId });
     }
   };
 

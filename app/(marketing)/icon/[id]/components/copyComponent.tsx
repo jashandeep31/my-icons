@@ -1,5 +1,5 @@
 "use client";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Check, Copy } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -8,6 +8,7 @@ const CopyComponent = ({ url }: { url: string }) => {
   const [messageCopied, setMessageCopied] = useState(false);
 
   const copyCommand = () => {
+    const id = toast("Getting command");
     try {
       navigator.clipboard.writeText(`
 attrib -h -s "%cd%\\desktop.ini"
@@ -23,14 +24,12 @@ attrib +r "%cd%"
       `);
 
       setMessageCopied(true);
+      toast.success("Copied 🎉", { id });
       setTimeout(() => {
         setMessageCopied(false);
       }, 2000);
     } catch (e) {
-      toast({
-        title: "Copy failed",
-        variant: "destructive",
-      });
+      toast.error("Coping failed", { id });
     }
   };
 

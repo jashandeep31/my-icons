@@ -1,9 +1,9 @@
 "use client";
-import { toast } from "@/components/ui/use-toast";
 import { selectBaseIconConfig } from "@/store/features/playground/baseIconSlice";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { Image } from "react-konva";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
 import useImage from "use-image";
 const BaseIconRender = forwardRef(
   (
@@ -31,9 +31,8 @@ const BaseIconRender = forwardRef(
         onMouseDown={(e) =>
           !baseIconConfig.locked
             ? ref.current.nodes([e.currentTarget])
-            : toast({
-                title: "Base Icon is locked",
-                description: "Unlock the base icon to move it around",
+            : toast.warning("Base icon layer is locked", {
+                description: "Unlock the base Icon layer to move around.",
               })
         }
       />
