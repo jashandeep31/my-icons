@@ -29,7 +29,6 @@ const IconsRenderer = () => {
     } catch (e) {}
   };
 
-  // TODO: read the bookmark from the x.com
   const {
     data,
     isFetched,

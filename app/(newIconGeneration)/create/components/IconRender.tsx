@@ -83,7 +83,6 @@ const IconRender = forwardRef(
               ? ref.current.nodes([e.currentTarget])
               : toast({ title: `Layer ${icon.id} is locked` });
           }}
-          // TODO: fix get the better size when someone insert the new image
           width={sizeModified ? size.width : image?.width}
           height={sizeModified ? size.height : image?.height}
           onDragEnd={(e) => {

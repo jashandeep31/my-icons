@@ -18,8 +18,6 @@ const BaseIconRender = forwardRef(
     const baseIconConfig = useSelector(selectBaseIconConfig);
     const [image] = useImage(baseImage);
 
-    // TODO: add a message of locked on click
-    // TODO: udpate position on drag and mouseclick
     if (!baseIconConfig.visible) {
       return null;
     }

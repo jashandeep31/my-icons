@@ -59,13 +59,6 @@ export default async function page() {
       <div className="md:mt-24 mt-12">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-lg">Popular Icons</h2>
-          {/* TODO: add fitler and show more button */}
-          {/* <div>
-                        <input
-                            type="text"
-                            className="border rounded p-1 bg-muted text-sm"
-                        />
-                    </div> */}
         </div>
         <div className="mt-6 grid grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-6 mb-6">
           {icons.map((icon, index) => (

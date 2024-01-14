@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
-// TODO: more methods needed to be added like locked visible etc
 
 type PlatformType = "windows" | "mac" | "unknown";
 
@@ -21,7 +20,6 @@ const initialState: InitialStateType = {
   sizeChanged: false,
   size: { width: 0, height: 0 },
   url: "/mac.png",
-  // url: "https://my-icons.blr1.digitaloceanspaces.com/testing/baseicons/580040e1-71cb-4a05-ac02-3a2c98477c4bwindows-11-default",
   locked: true,
   visible: true,
   platform: "unknown",
@@ -49,11 +47,6 @@ export const baseIconSlice = createSlice({
   name: "baseIconConfig",
   initialState,
   reducers: {
-    // updateBaseIconUrl: (state, action) => {
-    //   state.url = base64;
-
-    //   // state.url = "/mac.png";
-    // },
     updateBaseIconPosition: (state, action) => {
       state.position = action.payload;
     },

@@ -39,7 +39,6 @@ const PlayGround = () => {
         className="overflow-hidden"
         ref={stageRef}
       >
-        {/* TODO: Add the guide lines for the icons */}
         <Layer>
           {React.useMemo(
             () => (

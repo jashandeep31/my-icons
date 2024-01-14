@@ -53,7 +53,6 @@ const SidebarTopControls = ({
         <li className=" text-foreground/60 py-2 border-t border-b flex justify-between">
           Base Icon
           <span className="flex flex-wrap gap-2">
-            {/* TODO: add dispatch to change url */}
             <button className="" onClick={() => setBaseIconModalState(true)}>
               <FileEdit width={10} height={10} />
             </button>
