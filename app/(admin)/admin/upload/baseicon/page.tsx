@@ -1,4 +1,4 @@
-import UploadBaseIcon from "@/components/upload-base-icon";
+import UploadBaseIcon from "@/components/uploadBaseIcon";
 import { getCurrentUser } from "@/lib/session";
 import { redirect } from "next/navigation";
 import React from "react";
