@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Bug } from "lucide-react";
 const inter = Inter({ subsets: ["latin"] });
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -62,6 +63,7 @@ export default function RootLayout({
                 Report Bug
               </Link>
               <Analytics />
+              <SpeedInsights />
             </StoreProvider>
           </LayoutClient>
         </ThemeProvider>
