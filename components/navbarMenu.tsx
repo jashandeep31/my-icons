@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
-import DesktopNavMenu from "./desktop-navmenu";
+import DesktopNavMenu from "./desktopNavMenu";
 import Image from "next/image";
 import { Menu, MoonIcon, SunIcon, X } from "lucide-react";
 import { MainMenuConfig } from "@/config/navbarConfig";

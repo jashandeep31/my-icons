@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/store/StoreProvider";
 import { Toaster } from "@/components/ui/toaster";
-import LayoutClient from "./layout.client";
+import LayoutClient from "./layoutClient";
 import Script from "next/script";
 import { siteConfig } from "@/config/siteConfig";
 import { ThemeProvider } from "./theme.provider";

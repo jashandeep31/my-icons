@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import React from "react";
-import LayoutClient from "./layout.client";
+import LayoutClient from "./layoutClient";
 
 export default async function layout({
   children,

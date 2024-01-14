@@ -1,6 +1,6 @@
 import React from "react";
 import { getCurrentUser } from "@/lib/session";
-import NavbarMenu from "./navbar.menu";
+import NavbarMenu from "./navbarMenu";
 
 const Navbar = async () => {
   const session = await getCurrentUser();
