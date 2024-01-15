@@ -26,7 +26,7 @@ export const uploadToS3 = async (path: string, name: string, file: Buffer) => {
 
   try {
     const response = await client.send(command);
-    return `https://${process.env.STORAGE_NAME}.${process.env.STORAGE_REGION}.digitaloceanspaces.com/testing/${path}/${filename}`;
+    return `https://${process.env.STORAGE_NAME}.${process.env.STORAGE_REGION}.digitaloceanspaces.com/myicons_production/${path}/${filename}`;
   } catch (err) {
     console.log(err);
     throw new AppError("something went wrong", 500);
