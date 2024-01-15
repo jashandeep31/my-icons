@@ -39,7 +39,7 @@ const FinalIconDetailForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "Next js icon",
+      name: "",
       public: true,
     },
   });
