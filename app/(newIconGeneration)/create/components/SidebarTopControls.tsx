@@ -51,7 +51,13 @@ const SidebarTopControls = ({
       <p className="font-bold">Layers</p>
       <ul className="text-xs mt-2">
         <li className=" text-foreground/60 py-2 border-t border-b flex justify-between">
-          Base Icon
+          <span className="flex gap-1 items-center">
+            Base Icon{" "}
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full  w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+          </span>
           <span className="flex flex-wrap gap-2">
             <button className="" onClick={() => setBaseIconModalState(true)}>
               <FileEdit width={10} height={10} />

@@ -71,7 +71,7 @@ const MyIconsRenderer = () => {
                         )
                       }
                     />
-                    <div className="flex flex-wrap justify-between items-center">
+                    <div className="flex  justify-between items-center">
                       <div>
                         <p className="text-xs bg-background px-2 py-1 rounded-full inline-block">
                           {icon.name}
