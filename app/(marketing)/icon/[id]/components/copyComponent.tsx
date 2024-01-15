@@ -49,7 +49,7 @@ attrib +r "%cd%"
         </button>
       </div>
       <Link
-        href="/"
+        href="https://github.com/jashandeep31/my-icons/blob/main/howCMDWork.md"
         className="text-xs font-medium text-foreground/60 underline"
       >
         Learn how to use?

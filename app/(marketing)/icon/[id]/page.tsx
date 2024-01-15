@@ -4,13 +4,13 @@ import { cn } from "@/lib/utils";
 import { iconTypes } from "@/types";
 import { ArrowLeft, Download } from "lucide-react";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import CopyComponent from "./components/copyComponent";
 import ImagesComponent from "./components/imagesComponent";
 
 async function getIcon({ id }: { id: string }) {
   const res = await fetch(`${baseUrl}/icons/get/${id}`);
+
   const data = await res.json();
   return data.data.icon;
 }
@@ -18,7 +18,7 @@ async function getIcon({ id }: { id: string }) {
 const page = async ({ params }: { params: { id: string } }) => {
   const icon: iconTypes = await getIcon(params);
   return (
-    <div className="container mt-6">
+    <div className="container mt-6 pb-12">
       <div>
         <button
           className={cn(
