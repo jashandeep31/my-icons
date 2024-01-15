@@ -17,16 +17,17 @@ const client = new S3Client({
 
 export const uploadToS3 = async (path: string, name: string, file: Buffer) => {
   const filename = uuidv4() + name;
+  const key = `myicons_production/${path}/${filename}`;
   const command = new PutObjectCommand({
     Bucket: process.env.STORAGE_NAME,
-    Key: "myicons_production/" + path + "/" + filename,
+    Key: key,
     Body: file,
     ACL: "public-read",
   });
 
   try {
     const response = await client.send(command);
-    return `https://${process.env.STORAGE_NAME}.${process.env.STORAGE_REGION}.digitaloceanspaces.com/myicons_production/${path}/${filename}`;
+    return `https://${process.env.STORAGE_NAME}.${process.env.STORAGE_REGION}.digitaloceanspaces.com/${key}`;
   } catch (err) {
     console.log(err);
     throw new AppError("something went wrong", 500);
