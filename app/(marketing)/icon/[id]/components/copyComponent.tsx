@@ -8,7 +8,7 @@ const CopyComponent = ({ url }: { url: string }) => {
   const [messageCopied, setMessageCopied] = useState(false);
 
   const copyCommand = () => {
-    const id = toast("Getting command");
+    const id = toast.loading("Getting command");
     try {
       navigator.clipboard.writeText(`
 attrib -h -s "%cd%\\desktop.ini"

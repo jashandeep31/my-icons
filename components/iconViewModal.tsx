@@ -36,7 +36,7 @@ const IconViewModal = () => {
   };
 
   const copyCommand = () => {
-    const id = toast("Getting command");
+    const id = toast.loading("Getting command");
 
     try {
       navigator.clipboard.writeText(`

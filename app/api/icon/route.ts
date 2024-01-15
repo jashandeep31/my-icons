@@ -57,8 +57,8 @@ export const POST = catchAsync(async (req: Request) => {
   });
 
   const [icoURL, pngURL] = await Promise.all([
-    uploadToS3("icofiletesting", slugifiedName, icoBuffer),
-    uploadToS3("icofiletesting", slugifiedName, pngBuffer),
+    uploadToS3("icoformat", slugifiedName, icoBuffer),
+    uploadToS3("pngformat", slugifiedName, pngBuffer),
   ]);
 
   const icon = await db.icon.create({

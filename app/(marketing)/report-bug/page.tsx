@@ -39,7 +39,7 @@ const ReportBug = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const id = toast("Submitting bug report");
+    const id = toast.loading("Submitting bug report");
     axios
       .post(`${baseUrl}/bugs`, values)
       .then((res) => {

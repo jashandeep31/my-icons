@@ -29,7 +29,7 @@ const UpdateName = ({ session }: { session: session }) => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const id = toast("Updating data");
+    const id = toast.loading("Updating data");
     try {
       const res = await axios.patch(`${baseUrl}/user/`, data);
       toast.success("Updated Successfully 🎉", { id });

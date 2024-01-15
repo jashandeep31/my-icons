@@ -19,7 +19,7 @@ export const uploadToS3 = async (path: string, name: string, file: Buffer) => {
   const filename = uuidv4() + name;
   const command = new PutObjectCommand({
     Bucket: process.env.STORAGE_NAME,
-    Key: "testing/" + path + "/" + filename,
+    Key: "myicons_production/" + path + "/" + filename,
     Body: file,
     ACL: "public-read",
   });

@@ -91,7 +91,7 @@ const IconsRenderer = () => {
     if (!initialQueryHandler.current) {
       const delayDebounceFn = setTimeout(() => {
         refetch();
-      }, 1000);
+      }, 300);
 
       return () => clearTimeout(delayDebounceFn);
     } else if (query !== "") {
@@ -100,7 +100,6 @@ const IconsRenderer = () => {
     }
   }, [query]);
 
-  console.log(data?.pages.length);
   return (
     <div>
       <div className="flex justify-between">

@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -44,6 +45,7 @@ const FinalIconDetailForm = ({
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
+    const id = toast.loading("Rendering..");
     try {
       // conversion of base64 to blog to send the server
       const byteCharacters = atob(convertedIconsConfig.pngURL.split(",")[1]);
@@ -67,9 +69,13 @@ const FinalIconDetailForm = ({
         pngURL: imagesRes.pngURL,
         icoURL: imagesRes.icoURL,
       });
+      toast.success("Icon rendered 🎉", { id });
       router.push(`/icon/${res.data.icon.id}`);
     } catch (error: any) {
-      console.log(error.response);
+      toast.error("Something went wrong ", {
+        description: "Rendering of image failed",
+        id,
+      });
     }
   }
 

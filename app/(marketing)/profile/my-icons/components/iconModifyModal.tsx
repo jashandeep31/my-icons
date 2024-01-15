@@ -37,7 +37,7 @@ const IconModifyModal = ({
   });
   const [processingDelete, setProcessingDelete] = useState(false);
   const sendDeleteRequest = async () => {
-    const toastId = toast("Verifying request");
+    const toastId = toast.loading("Verifying request");
     try {
       setProcessingDelete(true);
       const res = await axios.delete(`${baseUrl}/icon/${id}`);
@@ -59,7 +59,7 @@ const IconModifyModal = ({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const toastId = toast("Validating data");
+    const toastId = toast.loading("Validating data");
     try {
       data.public = publicStatus;
       const res = await axios.patch(`${baseUrl}/icon/${id}`, data);
