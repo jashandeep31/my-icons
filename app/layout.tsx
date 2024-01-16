@@ -31,7 +31,19 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Jashandeep Singh",
-  // TODO: pending to add for twitter and favicon icon
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
