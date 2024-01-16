@@ -28,8 +28,7 @@ const UploadBaseIcon = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "Windows 11 default",
-      platform: "WINDOWS",
+      name: "",
     },
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -80,7 +79,6 @@ const UploadBaseIcon = () => {
             <Label htmlFor="picture">Platform:</Label>
             <RadioGroup
               className="ml-2 text-foreground/60 mt-1"
-              defaultValue="WINDOWS"
               onValueChange={(e) =>
                 form.setValue("platform", e as "WINDOWS" | "MACOS" | "OTHER")
               }

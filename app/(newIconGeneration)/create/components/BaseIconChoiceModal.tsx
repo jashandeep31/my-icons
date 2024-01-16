@@ -108,6 +108,12 @@ const BaseIconChoiceModal = ({
                   </div>
                 ))
               : null}
+
+            {baseIconsQuery.isFetching && (
+              <div className="w-full rounded-md min-h-24 bg-muted animate-pulse">
+                {" "}
+              </div>
+            )}
           </div>
         </div>
       </div>
