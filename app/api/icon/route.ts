@@ -8,7 +8,7 @@ import slugify from "slugify";
 import * as z from "zod";
 
 const FormDataSchema = z.object({
-  name: z.string().min(3, "Name is required atleast 3 char"),
+  name: z.string().min(2, "Name is required atleast 2 char").trim(),
   platform: z.enum(["MACOS", "WINDOWS", "OTHER"]),
   public: z.boolean(),
   pngURL: z.string().min(3, "Name is required atleast 3 char"),

@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(3, "Atleast 3 char"),
+  name: z.string().min(2, "Atleast 2 char").trim(),
   platform: z.enum(["WINDOWS", "MACOS", "OTHER"]),
   public: z.boolean(),
 });
