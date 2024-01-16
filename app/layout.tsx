@@ -15,6 +15,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`${siteConfig.url}`),
+
   title: siteConfig.name,
   description: siteConfig.description,
   keywords: [
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: `/og.jpg`,
+    images: ["/og.jpg"],
     creator: "@jashandeep31",
   },
   icons: {
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
