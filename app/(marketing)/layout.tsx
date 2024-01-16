@@ -12,7 +12,7 @@ export default async function layout({
     <div className="flex flex-col min-h-screen">
       {/* Just to the icon view moodal with controll FIXME:  better solution can remove this*/}
       <LayoutClient />
-      <header className="sticky top-0">
+      <header className="sticky  z-10 top-0">
         <Navbar />
       </header>
 
