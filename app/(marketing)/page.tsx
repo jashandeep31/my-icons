@@ -4,21 +4,25 @@ import Link from "next/link";
 import React from "react";
 import IconCard from "@/components/iconCard";
 import { db } from "@/lib/db";
+import { unstable_cache } from "next/cache";
 
-async function getPopularIcons() {
-  const res = await db.icon.findMany({
-    where: {
-      public: true,
-    },
-    orderBy: {
-      downloads: "desc",
-    },
-    skip: 0,
-    take: 12,
-  });
-
-  return res;
-}
+const getPopularIcons = unstable_cache(
+  async () =>
+    await db.icon.findMany({
+      where: {
+        public: true,
+      },
+      orderBy: {
+        downloads: "desc",
+      },
+      skip: 0,
+      take: 12,
+    }),
+  ["popular_icons"],
+  {
+    revalidate: 3600,
+  }
+);
 
 export default async function page() {
   const icons = await getPopularIcons();
