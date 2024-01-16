@@ -33,14 +33,16 @@ const UploadBaseIcon = () => {
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     // TODO: handling isSubmitting state is pending
+    const id = toast.loading("Uploading Icon");
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("platform", data.platform);
     formData.append("icon", data.icon[0]);
     try {
       const res = await axios.post(`${baseUrl}/baseicons/upload`, formData);
+      toast.success("Upload successful ", { id });
     } catch (error: any) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id });
     }
   }
   return (
@@ -103,7 +105,9 @@ const UploadBaseIcon = () => {
             ) : null}
           </div>
           <div>
-            <Button className="mt-1">Submit</Button>
+            <Button disabled={form.formState.isSubmitting} className="mt-1">
+              Submit
+            </Button>
           </div>
         </form>
       </div>
