@@ -45,7 +45,7 @@ const NavbarMenu = ({
     <div
       className={` ${
         !mobileMenuStatus ? "border-b" : null
-      }  bg-background   relative flex-col flex items-center`}
+      }  bg-background relative flex-col flex items-center`}
       ref={ref}
     >
       <div className="container min-h-16  flex justify-between items-center">
@@ -57,7 +57,7 @@ const NavbarMenu = ({
           <DesktopNavMenu />
         </div>
 
-        <div className="md:flex hidden gap-6">
+        <div className="lg:flex hidden gap-6">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -106,7 +106,7 @@ const NavbarMenu = ({
             </Link>
           )}
         </div>
-        <div className="flex md:hidden items-center">
+        <div className="flex lg:hidden items-center">
           <button
             className="hover:bg-accent duration-300 p-1 rounded"
             onClick={(e) => setMobileMenuStatus(!mobileMenuStatus)}
@@ -121,7 +121,7 @@ const NavbarMenu = ({
       </div>
       <div
         className={`w-full ${
-          mobileMenuStatus ? "block absolute top-16 border-b pb-3" : "hidden"
+          mobileMenuStatus ? "block absolute top-12 border-b pb-3" : "hidden"
         } container mt-3  bg-background`}
       >
         <nav>
