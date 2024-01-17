@@ -9,7 +9,7 @@ const DesktopNavMenu = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden md:flex gap-4 font-medium text-sm">
+    <nav className="hidden lg:flex gap-4 font-medium text-sm">
       {MainMenuConfig.map((item, index) => (
         <Link
           key={index}

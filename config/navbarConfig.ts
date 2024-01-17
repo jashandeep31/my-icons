@@ -11,6 +11,11 @@ export const MainMenuConfig = [
     name: "Create Custom Icon",
     path: "/create",
   },
+
+  {
+    name: "Blogs",
+    path: "/blog",
+  },
   {
     name: "Github",
     path: "https://github.com/jashandeep31/my-icons",
