@@ -12,7 +12,10 @@ export default function page() {
     <div className="container mt-6 md:mt-12">
       <Link
         href={"/"}
-        className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+        className={cn(
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "flex items-center gap-2"
+        )}
       >
         <Home width={13} height={13} />
         Home
