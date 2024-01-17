@@ -110,7 +110,7 @@ attrib +r "%cd%"
   }
 
   return (
-    <div className="h-screen w-full  bg-black/80  fixed top-0 left-0 flex items-center justify-center z-20  md:px-4 md:py-4 px-4 py-12 ">
+    <div className="`h-screen w-full  bg-black/80  fixed top-0 left-0 flex items-center justify-center z-20  md:px-4 md:py-4 px-4 py-12 ">
       <div
         className=" rounded-md bg-background border-2 md:w-3/4 w-full overflow-scroll h-full"
         ref={ref}
@@ -167,7 +167,7 @@ attrib +r "%cd%"
           </div>
           <div className="h-full flex flex-col  py-12 justify-between gap-6">
             <div>
-              <h1 className="text-xl py-24 font-bold">{iconData.name}</h1>
+              <h1 className="text-xl  font-bold">{iconData.name}</h1>
               <p className="text-sm text-foreground underline ">
                 <button
                   className="underline"
