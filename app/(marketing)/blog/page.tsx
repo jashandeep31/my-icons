@@ -1,20 +1,24 @@
 import React from "react";
 import { allBlogs } from "contentlayer/generated";
-import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function page() {
   return (
     <div className="container md:mt-12 mt-6">
-      <Button variant={"ghost"} size="sm" className="flex items-center gap-2">
+      <Link
+        href={"/"}
+        className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+      >
         <Home width={13} height={13} />
         Home
-      </Button>
+      </Link>
 
-      <div className="grid grid-cols-2 gap-12 mt-6">
+      <div className="grid md:grid-cols-2 md:gap-12 gap-6 mt-6">
         {allBlogs.map((blog, index: number) => (
           <Link
             href={blog._id}

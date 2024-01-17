@@ -84,7 +84,8 @@ attrib +r "%cd%"
 
   if (!iconData) {
     return (
-      <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
+      // Just a loading state so be carefull while editing may confuse refactor is needed here
+      <div className=" h-screen w-full  bg-[#000000B3] fixed top-0 z-20 left-0 flex items-center justify-center px-4 py-12   md:p-4 ">
         <div
           className="rounded-md bg-background md:w-3/4 w-full h-3/4 grid md:grid-cols-2 p-12 gap-6"
           ref={ref}
@@ -109,9 +110,9 @@ attrib +r "%cd%"
   }
 
   return (
-    <div className=" h-screen w-full  bg-black/80  fixed top-0 left-0 flex items-center justify-center z-10 p-4 overflow-y-auto ">
+    <div className="h-screen w-full  bg-black/80  fixed top-0 left-0 flex items-center justify-center z-20  md:px-4 md:py-4 px-4 py-12 ">
       <div
-        className="rounded-md bg-background border-2 md:w-3/4 w-full "
+        className=" rounded-md bg-background border-2 md:w-3/4 w-full overflow-scroll h-full"
         ref={ref}
       >
         <div className="flex border-b justify-between items-center p-4">
@@ -166,7 +167,7 @@ attrib +r "%cd%"
           </div>
           <div className="h-full flex flex-col  py-12 justify-between gap-6">
             <div>
-              <h1 className="text-xl font-bold">{iconData.name}</h1>
+              <h1 className="text-xl py-24 font-bold">{iconData.name}</h1>
               <p className="text-sm text-foreground underline ">
                 <button
                   className="underline"
@@ -196,6 +197,7 @@ attrib +r "%cd%"
                 ICO <Download width={15} height={15} />
               </Link>
             </div>
+
             <div>
               <div className="border p-2 text-xs rounded-md flex justify-between bg-muted/60 items-center">
                 <p className="text-foreground/60 font-medium">
