@@ -1,19 +1,19 @@
-import { RootState } from "@/store/store";
-import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
+import { RootState } from "@/store/store"
+import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit"
 
 export type Icon = {
-  id: number;
-  base64: string;
-  position?: { x: number; y: number };
-  size?: { width: number; height: number };
-  locked: boolean;
-  visible: boolean;
-  index: number;
-};
+  id: number
+  base64: string
+  position?: { x: number; y: number }
+  size?: { width: number; height: number }
+  locked: boolean
+  visible: boolean
+  index: number
+}
 
-type iconsArray = Icon[];
+type iconsArray = Icon[]
 
-const initialState: iconsArray = [];
+const initialState: iconsArray = []
 
 export const iconsArraySlice = createSlice({
   name: "iconsArrayConfig",
@@ -27,33 +27,33 @@ export const iconsArraySlice = createSlice({
         ...action.payload,
         id: state.length,
         index: state.length,
-      };
+      }
 
-      state.push(data);
+      state.push(data)
     },
     removeIconsArrayIcon: (state, action: PayloadAction<{ id: number }>) => {
-      const id = action.payload.id;
-      state.splice(id, 1);
-      state.forEach((item, i) => (item.id = i));
+      const id = action.payload.id
+      state.splice(id, 1)
+      state.forEach((item, i) => (item.id = i))
     },
     updateIconsArrayIconVisible: (state, action) => {
-      const index = state.findIndex((icon) => icon.id === action.payload.id);
-      state[index].visible = action.payload.visible;
+      const index = state.findIndex((icon) => icon.id === action.payload.id)
+      state[index].visible = action.payload.visible
     },
     updateIconsArrayIconLocked: (state, action) => {
-      const index = state.findIndex((icon) => icon.id === action.payload.id);
-      state[index].locked = action.payload.locked;
+      const index = state.findIndex((icon) => icon.id === action.payload.id)
+      state[index].locked = action.payload.locked
     },
     updateIconsArrayIconPosition: (state, action) => {
-      const index = state.findIndex((icon) => icon.id === action.payload.id);
-      state[index].position = action.payload.position;
+      const index = state.findIndex((icon) => icon.id === action.payload.id)
+      state[index].position = action.payload.position
     },
     updateIconsArrayIconSize: (state, action) => {
-      const index = state.findIndex((icon) => icon.id === action.payload.id);
-      state[index].size = action.payload.size;
+      const index = state.findIndex((icon) => icon.id === action.payload.id)
+      state[index].size = action.payload.size
     },
   },
-});
+})
 
 export const {
   addIconsArrayIcon,
@@ -62,8 +62,8 @@ export const {
   updateIconsArrayIconLocked,
   updateIconsArrayIconPosition,
   updateIconsArrayIconSize,
-} = iconsArraySlice.actions;
+} = iconsArraySlice.actions
 
 export const selectIconsArrayConfig = (state: RootState) =>
-  state.iconsArraySlice;
-export default iconsArraySlice.reducer;
+  state.iconsArraySlice
+export default iconsArraySlice.reducer

@@ -8,4 +8,4 @@ export const siteConfig = {
     twitter: "https://twitter.com/jashandeep31",
     github: "https://github.com/jashandeep31/my-icons",
   },
-};
+}

@@ -24,4 +24,4 @@ export const MainMenuConfig = [
     name: "Contact Us",
     path: "/contact-us",
   },
-];
+]

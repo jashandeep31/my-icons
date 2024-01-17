@@ -1,11 +1,11 @@
-import Link from "next/link";
-import React from "react";
+import Link from "next/link"
+import React from "react"
 
 function Footer() {
   return (
-    <div className="py-4 border-t">
-      <div className="container flex items-center gap-6 flex-wrap justify-between pb-24">
-        <p className="text-sm text-foreground/60 flex gap-2 md:flex-row flex-col">
+    <div className="border-t py-4">
+      <div className="container flex flex-wrap items-center justify-between gap-6 pb-24">
+        <p className="flex flex-col gap-2 text-sm text-foreground/60 md:flex-row">
           <span>
             Built by{" "}
             <Link
@@ -25,15 +25,15 @@ function Footer() {
             </Link>
           </span>
         </p>
-        <div className="flex gap-4 flex-wrap text-sm">
+        <div className="flex flex-wrap gap-4 text-sm">
           <Link
-            className="underline text-foreground/60 hover:text-foreground  duration-300"
+            className="text-foreground/60 underline duration-300  hover:text-foreground"
             href={"terms-and-conditions"}
           >
             Terms and Conditions
           </Link>
           <Link
-            className="underline text-foreground/60 hover:text-foreground  duration-300"
+            className="text-foreground/60 underline duration-300  hover:text-foreground"
             href={"privacy-policy"}
           >
             Privacy Policy
@@ -41,7 +41,7 @@ function Footer() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import { Icons } from "@/components/icons";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { signIn } from "next-auth/react";
+"use client"
+import React from "react"
+import { Icons } from "@/components/icons"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { signIn } from "next-auth/react"
 
 const AuthComponentLoginSignup = () => {
   return (
@@ -11,7 +11,7 @@ const AuthComponentLoginSignup = () => {
       <button
         className={cn(
           buttonVariants({ variant: "secondary" }),
-          "w-full flex items-center justify-center gap-2"
+          "flex w-full items-center justify-center gap-2"
         )}
         onClick={() => signIn("github", { redirect: true, callbackUrl: "/" })}
       >
@@ -21,7 +21,7 @@ const AuthComponentLoginSignup = () => {
       <button
         className={cn(
           buttonVariants({ variant: "secondary" }),
-          "w-full flex items-center justify-center gap-2"
+          "flex w-full items-center justify-center gap-2"
         )}
         onClick={() => signIn("google", { redirect: true, callbackUrl: "/" })}
       >
@@ -29,7 +29,7 @@ const AuthComponentLoginSignup = () => {
         Google
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default AuthComponentLoginSignup;
+export default AuthComponentLoginSignup

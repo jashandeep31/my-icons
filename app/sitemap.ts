@@ -1,8 +1,8 @@
-import { db } from "@/lib/db";
-import { MetadataRoute } from "next";
+import { db } from "@/lib/db"
+import { MetadataRoute } from "next"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const URL = process.env.NEXT_PUBLIC_SELF ?? "";
+  const URL = process.env.NEXT_PUBLIC_SELF ?? ""
   const map = [
     {
       url: `${URL}`,
@@ -22,21 +22,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     { url: `${URL}/privacy-policy`, lastModified: new Date(), priority: 0.5 },
     { url: `${URL}/privacy-policy`, lastModified: new Date(), priority: 0.5 },
-  ];
+  ]
 
   const icons = await db.icon.findMany({
     orderBy: {
       createdAt: "desc",
     },
-  });
+  })
 
   icons.map((icon, index: number) => {
     map.push({
       url: `${URL}/icon/${icon.id}`,
       lastModified: new Date(),
       priority: 0.7,
-    });
-  });
+    })
+  })
 
-  return map;
+  return map
 }

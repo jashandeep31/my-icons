@@ -1,45 +1,45 @@
-import { buttonVariants } from "@/components/ui/button";
-import { baseUrl } from "@/lib/axiosConfig";
-import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { useClickAway } from "@uidotdev/usehooks";
-import axios from "axios";
-import { X } from "lucide-react";
-import React from "react";
-import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { updateBaseIconUrl } from "@/store/features/playground/baseIconSlice";
+import { buttonVariants } from "@/components/ui/button"
+import { baseUrl } from "@/lib/axiosConfig"
+import { cn } from "@/lib/utils"
+import { useQuery } from "@tanstack/react-query"
+import { useClickAway } from "@uidotdev/usehooks"
+import axios from "axios"
+import { X } from "lucide-react"
+import React from "react"
+import Image from "next/image"
+import { useDispatch } from "react-redux"
+import { updateBaseIconUrl } from "@/store/features/playground/baseIconSlice"
 
 const BaseIconChoiceModal = ({
   setBaseIconModalState,
 }: {
-  setBaseIconModalState: React.Dispatch<React.SetStateAction<boolean>>;
+  setBaseIconModalState: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const ref = useClickAway<HTMLDivElement>(() => {
-    setBaseIconModalState(false);
-  });
+    setBaseIconModalState(false)
+  })
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // code to fetch the icons from the api
   const getBaseIcons = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/baseicons`);
-      return res.data.data.baseIcons ? res.data.data.baseIcons : [];
+      const res = await axios.get(`${baseUrl}/baseicons`)
+      return res.data.data.baseIcons ? res.data.data.baseIcons : []
     } catch (e) {
-      return null;
+      return null
     }
-  };
+  }
   const baseIconsQuery = useQuery({
     queryKey: ["baseIconsAll"],
     queryFn: async () => await getBaseIcons(),
-  });
+  })
   return (
-    <div className=" h-screen w-full  bg-[#000000df] fixed top-0 left-0 flex items-center justify-center z-10">
+    <div className=" fixed left-0  top-0 z-10 flex h-screen w-full items-center justify-center bg-[#000000df]">
       <div
-        className="border flex flex-col bg-background rounded-md shadow w-3/4 h-3/4 p-4"
+        className="flex h-3/4 w-3/4 flex-col rounded-md border bg-background p-4 shadow"
         ref={ref}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h1 className="text-lg font-bold">Choose Base Icon</h1>
           <div className="hidden ">
             <button
@@ -59,7 +59,7 @@ const BaseIconChoiceModal = ({
                   variant: "ghost",
                   size: "sm",
                 }),
-                "text-sm text-foreground/60 font-light"
+                "text-sm font-light text-foreground/60"
               )}
             >
               Windows
@@ -71,7 +71,7 @@ const BaseIconChoiceModal = ({
                   variant: "ghost",
                   size: "sm",
                 }),
-                "text-sm text-foreground/60 font-light"
+                "text-sm font-light text-foreground/60"
               )}
             >
               Mac OS
@@ -87,15 +87,15 @@ const BaseIconChoiceModal = ({
           </div>
         </div>
         <div className="mt-3 flex-1  ">
-          <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-2 gap-6  ">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-6 lg:grid-cols-8  ">
             {baseIconsQuery.isFetched && baseIconsQuery.data
               ? baseIconsQuery.data.map((icon: any, index: number) => (
                   <div
-                    className=" rounded bg-muted hover:bg-muted-foreground/15 duration-300 flex items-center justify-center p-4"
+                    className=" flex items-center justify-center rounded bg-muted p-4 duration-300 hover:bg-muted-foreground/15"
                     onClick={() => {
                       // TODO: update the OS along with the icon so that it could  be easy at the end of submiting the
-                      dispatch(updateBaseIconUrl(icon.iconUrl) as any);
-                      setBaseIconModalState(false);
+                      dispatch(updateBaseIconUrl(icon.iconUrl) as any)
+                      setBaseIconModalState(false)
                     }}
                     key={index}
                   >
@@ -110,7 +110,7 @@ const BaseIconChoiceModal = ({
               : null}
 
             {baseIconsQuery.isFetching && (
-              <div className="w-full rounded-md min-h-24 bg-muted animate-pulse">
+              <div className="min-h-24 w-full animate-pulse rounded-md bg-muted">
                 {" "}
               </div>
             )}
@@ -118,7 +118,7 @@ const BaseIconChoiceModal = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BaseIconChoiceModal;
+export default BaseIconChoiceModal

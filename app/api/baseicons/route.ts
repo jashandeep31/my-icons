@@ -1,15 +1,15 @@
-import catchAsync from "@/lib/catchAsync";
-import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import catchAsync from "@/lib/catchAsync"
+import { db } from "@/lib/db"
+import { NextResponse } from "next/server"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 export const GET = catchAsync(async (req: Request) => {
   // TODO: only for approved and add flters like windows macos
   const baseIcons = await db.baseIcon.findMany({
     where: {
       approved: true,
     },
-  });
+  })
   return NextResponse.json(
     {
       message: "Successful",
@@ -18,5 +18,5 @@ export const GET = catchAsync(async (req: Request) => {
       },
     },
     { status: 200 }
-  );
-});
+  )
+})

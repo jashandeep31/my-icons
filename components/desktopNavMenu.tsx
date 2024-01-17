@@ -1,15 +1,15 @@
-"use client";
-import { MainMenuConfig } from "@/config/navbarConfig";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+"use client"
+import { MainMenuConfig } from "@/config/navbarConfig"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import React from "react"
 
 const DesktopNavMenu = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
-    <nav className="hidden lg:flex gap-4 font-medium text-sm">
+    <nav className="hidden gap-4 text-sm font-medium lg:flex">
       {MainMenuConfig.map((item, index) => (
         <Link
           key={index}
@@ -19,14 +19,14 @@ const DesktopNavMenu = () => {
               pathname === item.path
                 ? "text-foreground underline "
                 : "text-foreground/60"
-            } hover:text-foreground/90 duration-300`
+            } duration-300 hover:text-foreground/90`
           )}
         >
           {item.name}
         </Link>
       ))}
     </nav>
-  );
-};
+  )
+}
 
-export default DesktopNavMenu;
+export default DesktopNavMenu

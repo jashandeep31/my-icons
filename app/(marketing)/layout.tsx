@@ -1,23 +1,23 @@
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
-import React from "react";
-import LayoutClient from "./layoutClient";
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
+import React from "react"
+import LayoutClient from "./layoutClient"
 
 export default async function layout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       {/* Just to the icon view moodal with controll FIXME:  better solution can remove this*/}
       <LayoutClient />
-      <header className="sticky  z-10 top-0">
+      <header className="sticky  top-0 z-10">
         <Navbar />
       </header>
 
-      <main className="flex-1 mb-6">{children}</main>
+      <main className="mb-6 flex-1">{children}</main>
       <Footer />
     </div>
-  );
+  )
 }

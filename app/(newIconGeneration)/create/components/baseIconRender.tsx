@@ -1,25 +1,25 @@
-"use client";
-import { selectBaseIconConfig } from "@/store/features/playground/baseIconSlice";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
-import { Image } from "react-konva";
-import { useSelector } from "react-redux";
-import { toast } from "sonner";
-import useImage from "use-image";
+"use client"
+import { selectBaseIconConfig } from "@/store/features/playground/baseIconSlice"
+import React, { forwardRef, useEffect, useRef, useState } from "react"
+import { Image } from "react-konva"
+import { useSelector } from "react-redux"
+import { toast } from "sonner"
+import useImage from "use-image"
 const BaseIconRender = forwardRef(
   (
     {
       baseImage,
     }: {
-      baseImage: string;
+      baseImage: string
     },
     ref: any
   ) => {
     // react redux configs
-    const baseIconConfig = useSelector(selectBaseIconConfig);
-    const [image] = useImage(baseImage);
+    const baseIconConfig = useSelector(selectBaseIconConfig)
+    const [image] = useImage(baseImage)
 
     if (!baseIconConfig.visible) {
-      return null;
+      return null
     }
     return (
       <Image
@@ -36,10 +36,10 @@ const BaseIconRender = forwardRef(
               })
         }
       />
-    );
+    )
   }
-);
+)
 
-BaseIconRender.displayName = "BaseIconRender";
+BaseIconRender.displayName = "BaseIconRender"
 
-export default BaseIconRender;
+export default BaseIconRender

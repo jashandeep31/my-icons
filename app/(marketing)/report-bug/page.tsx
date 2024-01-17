@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
+"use client"
+import React from "react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -11,13 +11,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
-import { baseUrl } from "@/lib/axiosConfig";
-import { toast } from "sonner";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import axios from "axios"
+import { baseUrl } from "@/lib/axiosConfig"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -25,7 +25,7 @@ const formSchema = z.object({
   }),
   email: z.string().email("Email must be valid"),
   message: z.string().min(20, "Minimum 20 char is required"),
-});
+})
 
 const ReportBug = () => {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -35,27 +35,27 @@ const ReportBug = () => {
       email: "",
       message: "",
     },
-  });
+  })
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const id = toast.loading("Submitting bug report");
+    const id = toast.loading("Submitting bug report")
     axios
       .post(`${baseUrl}/bugs`, values)
       .then((res) => {
         if (res.status === 201) {
-          toast.success("Bug report submitted", { id });
-          form.reset();
+          toast.success("Bug report submitted", { id })
+          form.reset()
         }
       })
       .catch((e) => {
-        console.log(e);
-        toast.error("Failed to created bug report", { id });
-      });
+        console.log(e)
+        toast.error("Failed to created bug report", { id })
+      })
   }
 
   return (
-    <div className="container md:mt-12 mt-6">
+    <div className="container mt-6 md:mt-12">
       <h1 className="text-lg font-bold">Report Bug</h1>
       <p className="text-sm text-primary/50">
         Facing any kind problem in website feel free to report here.
@@ -64,7 +64,7 @@ const ReportBug = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 mt-8"
+            className="mt-8 space-y-8"
           >
             <FormField
               control={form.control}
@@ -123,7 +123,7 @@ const ReportBug = () => {
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReportBug;
+export default ReportBug

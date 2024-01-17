@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import StoreProvider from "@/store/StoreProvider";
-import LayoutClient from "./layoutClient";
-import { Analytics } from "@vercel/analytics/react";
-import { siteConfig } from "@/config/siteConfig";
-import { ThemeProvider } from "./theme.provider";
-import { Toaster } from "@/components/ui/sonner";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Bug } from "lucide-react";
-const inter = Inter({ subsets: ["latin"] });
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import StoreProvider from "@/store/StoreProvider"
+import LayoutClient from "./layoutClient"
+import { Analytics } from "@vercel/analytics/react"
+import { siteConfig } from "@/config/siteConfig"
+import { ThemeProvider } from "./theme.provider"
+import { Toaster } from "@/components/ui/sonner"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Bug } from "lucide-react"
+const inter = Inter({ subsets: ["latin"] })
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${siteConfig.url}`),
@@ -54,12 +54,12 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -77,7 +77,7 @@ export default function RootLayout({
               <Link
                 className={cn(
                   buttonVariants(),
-                  "fixed right-10 bottom-10 flex gap-2 items-center"
+                  "fixed bottom-10 right-10 flex items-center gap-2"
                 )}
                 href={"/report-bug"}
               >
@@ -91,5 +91,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

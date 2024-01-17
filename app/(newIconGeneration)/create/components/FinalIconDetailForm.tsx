@@ -1,88 +1,88 @@
-import { buttonVariants } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { baseUrl } from "@/lib/axiosConfig";
-import { cn } from "@/lib/utils";
-import { selectConvertedIconsConfig } from "@/store/features/playground/convertedIconsSlice";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useClickAway } from "@uidotdev/usehooks";
-import axios from "axios";
-import { Loader2, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { toast } from "sonner";
-import * as z from "zod";
+import { buttonVariants } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { baseUrl } from "@/lib/axiosConfig"
+import { cn } from "@/lib/utils"
+import { selectConvertedIconsConfig } from "@/store/features/playground/convertedIconsSlice"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useClickAway } from "@uidotdev/usehooks"
+import axios from "axios"
+import { Loader2, X } from "lucide-react"
+import { useRouter } from "next/navigation"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import { toast } from "sonner"
+import * as z from "zod"
 
 const formSchema = z.object({
   name: z.string().min(2, "Atleast 2 char").trim(),
   platform: z.enum(["WINDOWS", "MACOS", "OTHER"]),
   public: z.boolean(),
-});
+})
 
 const FinalIconDetailForm = ({
   setFinalFormModalState,
 }: {
-  setFinalFormModalState: React.Dispatch<React.SetStateAction<boolean>>;
+  setFinalFormModalState: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const ref = useClickAway<HTMLDivElement>(() => {
-    setFinalFormModalState(false);
-  });
-  const router = useRouter();
+    setFinalFormModalState(false)
+  })
+  const router = useRouter()
 
-  const [publicStatus, setPublicStatus] = useState<boolean>(true);
+  const [publicStatus, setPublicStatus] = useState<boolean>(true)
 
-  const convertedIconsConfig = useSelector(selectConvertedIconsConfig);
+  const convertedIconsConfig = useSelector(selectConvertedIconsConfig)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       public: true,
     },
-  });
+  })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const id = toast.loading("Rendering..");
+    const id = toast.loading("Rendering..")
     try {
       // conversion of base64 to blog to send the server
-      const byteCharacters = atob(convertedIconsConfig.pngURL.split(",")[1]);
-      const byteArrays = new Array(byteCharacters.length);
+      const byteCharacters = atob(convertedIconsConfig.pngURL.split(",")[1])
+      const byteArrays = new Array(byteCharacters.length)
       for (let i = 0; i < byteCharacters.length; i++) {
-        byteArrays[i] = byteCharacters.charCodeAt(i);
+        byteArrays[i] = byteCharacters.charCodeAt(i)
       }
       const pngblob = new Blob([new Uint8Array(byteArrays)], {
         type: "image/jpeg",
-      });
-      const form = new FormData();
-      form.append("png", pngblob);
+      })
+      const form = new FormData()
+      form.append("png", pngblob)
       const { data: imagesRes } = await axios.post(
         `${process.env.NEXT_PUBLIC_CONVERTER_URL}/api/v1/convertor?api=${process.env.NEXT_PUBLIC_CONVERTER_API}`,
         form
-      );
+      )
       const res = await axios.post(`${baseUrl}/icon`, {
         name: data.name,
         platform: data.platform,
         public: data.public,
         pngURL: imagesRes.pngURL,
         icoURL: imagesRes.icoURL,
-      });
-      toast.success("Icon rendered 🎉", { id });
-      router.push(`/icon/${res.data.icon.id}`);
+      })
+      toast.success("Icon rendered 🎉", { id })
+      router.push(`/icon/${res.data.icon.id}`)
     } catch (error: any) {
       toast.error("Something went wrong ", {
         description: "Rendering of image failed",
         id,
-      });
+      })
     }
   }
 
   return (
-    <div className=" h-screen w-full  bg-[#000000db] fixed top-0 left-0 flex items-center justify-center z-10">
-      <div className="bg-background  rounded    border-2 md:w-2/4" ref={ref}>
-        <div className="flex justify-between items-center p-4 ">
+    <div className=" fixed left-0  top-0 z-10 flex h-screen w-full items-center justify-center bg-[#000000db]">
+      <div className="rounded  border-2    bg-background md:w-2/4" ref={ref}>
+        <div className="flex items-center justify-between p-4 ">
           <h2 className="text-lg font-bold  ">Final Form</h2>
           <button
             className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
@@ -108,7 +108,7 @@ const FinalIconDetailForm = ({
                 placeholder="Next Js"
               />
               {form.formState.errors.name ? (
-                <p className="mt-1 text-xs text-red-600 font-medium">
+                <p className="mt-1 text-xs font-medium text-red-600">
                   {form.formState.errors.name.message}
                 </p>
               ) : null}
@@ -116,7 +116,7 @@ const FinalIconDetailForm = ({
             <div>
               <Label htmlFor="picture">Platform:</Label>
               <RadioGroup
-                className="ml-2 text-foreground/60 mt-1"
+                className="ml-2 mt-1 text-foreground/60"
                 onValueChange={(e) =>
                   form.setValue("platform", e as "WINDOWS" | "MACOS" | "OTHER")
                 }
@@ -135,12 +135,12 @@ const FinalIconDetailForm = ({
                 </div>
               </RadioGroup>
               {form.formState.errors.platform ? (
-                <p className="mt-1 text-xs text-red-600 font-medium">
+                <p className="mt-1 text-xs font-medium text-red-600">
                   {form.formState.errors.platform.message}
                 </p>
               ) : null}
             </div>
-            <div className="flex items-center space-x-2 mt-4">
+            <div className="mt-4 flex items-center space-x-2">
               <Checkbox
                 id="terms"
                 checked={publicStatus}
@@ -176,7 +176,7 @@ const FinalIconDetailForm = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FinalIconDetailForm;
+export default FinalIconDetailForm

@@ -1,14 +1,14 @@
-"use client";
-import { toast } from "sonner";
-import { Check, Copy } from "lucide-react";
-import Link from "next/link";
-import React, { useState } from "react";
+"use client"
+import { toast } from "sonner"
+import { Check, Copy } from "lucide-react"
+import Link from "next/link"
+import React, { useState } from "react"
 
 const CopyComponent = ({ url }: { url: string }) => {
-  const [messageCopied, setMessageCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false)
 
   const copyCommand = () => {
-    const id = toast.loading("Getting command");
+    const id = toast.loading("Getting command")
     try {
       navigator.clipboard.writeText(`
 attrib -h -s "%cd%\\desktop.ini"
@@ -21,25 +21,25 @@ attrib +h "%cd%\\icon.ico"
 echo IconResource="%cd%\\icon.ico",0 >> desktop.ini
 attrib +h  desktop.ini
 attrib +r "%cd%"
-      `);
+      `)
 
-      setMessageCopied(true);
-      toast.success("Copied 🎉", { id });
+      setMessageCopied(true)
+      toast.success("Copied 🎉", { id })
       setTimeout(() => {
-        setMessageCopied(false);
-      }, 2000);
+        setMessageCopied(false)
+      }, 2000)
     } catch (e) {
-      toast.error("Coping failed", { id });
+      toast.error("Coping failed", { id })
     }
-  };
+  }
 
   return (
     <div>
-      <div className="border p-2 text-xs rounded-md flex justify-between bg-muted/60 items-center">
-        <p className="text-foreground/60 font-medium">cmd for windows</p>
+      <div className="flex items-center justify-between rounded-md border bg-muted/60 p-2 text-xs">
+        <p className="font-medium text-foreground/60">cmd for windows</p>
         <button
           onClick={copyCommand}
-          className="hover:bg-primary rounded p-1 hover:text-black duration-300"
+          className="rounded p-1 duration-300 hover:bg-primary hover:text-black"
         >
           {!messageCopied ? (
             <Copy width={12} height={12} />
@@ -55,7 +55,7 @@ attrib +r "%cd%"
         Learn how to use?
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default CopyComponent;
+export default CopyComponent

@@ -1,18 +1,18 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+import React, { useState } from "react"
 
 const ImagesComponent = ({
   pngURL,
   icoURL,
 }: {
-  pngURL: string;
-  icoURL: string;
+  pngURL: string
+  icoURL: string
 }) => {
-  const [viewOf, setViewOf] = useState<"png" | "ico">("png");
+  const [viewOf, setViewOf] = useState<"png" | "ico">("png")
 
   return (
     <div className="flex flex-col items-center">
-      <div className="md:w-2/4 p-6 bg-muted rounded-md w-full">
+      <div className="w-full rounded-md bg-muted p-6 md:w-2/4">
         {/* Not optimized so that drag drop should possible */}
         {viewOf === "png" ? (
           <img src={pngURL} className="w-full" alt="" />
@@ -21,12 +21,12 @@ const ImagesComponent = ({
         )}
       </div>
       <p className="text-xs "> Drag and drop {viewOf} file.</p>
-      <div className="bg-muted p-1 rounded-md gap-2 mt-4 grid grid-cols-2 md:w-2/4 w-full ">
+      <div className="mt-4 grid w-full grid-cols-2 gap-2 rounded-md bg-muted p-1 md:w-2/4 ">
         <button
           onClick={() => setViewOf("png")}
           className={`${
             viewOf === "png" ? "bg-background text-foreground shadow" : ""
-          } rounded w-full text-sm p-2 text-foreground/60 `}
+          } w-full rounded p-2 text-sm text-foreground/60 `}
         >
           PNG
         </button>
@@ -34,13 +34,13 @@ const ImagesComponent = ({
           onClick={() => setViewOf("ico")}
           className={`${
             viewOf === "ico" ? "bg-background text-foreground shadow" : ""
-          } rounded w-full text-sm p-2 text-foreground/60 `}
+          } w-full rounded p-2 text-sm text-foreground/60 `}
         >
           ICO
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ImagesComponent;
+export default ImagesComponent

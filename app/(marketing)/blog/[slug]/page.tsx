@@ -1,25 +1,25 @@
-import React from "react";
+import React from "react"
 
-import { allBlogs } from "@/.contentlayer/generated";
-import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
-import { format, parseISO } from "date-fns";
-import { Mdx } from "./components/mdxComponents";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Metadata, ResolvingMetadata } from "next";
-import { siteConfig } from "@/config/siteConfig";
+import { allBlogs } from "@/.contentlayer/generated"
+import { notFound } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
+import Image from "next/image"
+import { format, parseISO } from "date-fns"
+import { Mdx } from "./components/mdxComponents"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Metadata, ResolvingMetadata } from "next"
+import { siteConfig } from "@/config/siteConfig"
 
 async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
-  const blog = await getBlogFromParams(params);
+  const blog = await getBlogFromParams(params)
   if (!blog) {
-    return {};
+    return {}
   }
   return {
     title: blog.title,
@@ -58,24 +58,24 @@ async function generateMetadata({
       shortcut: "/favicon-16x16.png",
       apple: "/apple-touch-icon.png",
     },
-  };
+  }
 }
 
 async function getBlogFromParams({ slug }: { slug: string }) {
-  const blog = allBlogs.find((blog) => blog._id === `blog/${slug}`);
+  const blog = allBlogs.find((blog) => blog._id === `blog/${slug}`)
   if (!blog) {
-    return null;
+    return null
   }
-  return blog;
+  return blog
 }
 
 async function page({ params }: { params: { slug: string } }) {
-  const blog = await getBlogFromParams(params);
+  const blog = await getBlogFromParams(params)
   if (!blog) {
-    notFound();
+    notFound()
   }
   return (
-    <div className="container md:mt-12 mt-6">
+    <div className="container mt-6 md:mt-12">
       <div>
         <Link
           href={"/blog"}
@@ -88,14 +88,14 @@ async function page({ params }: { params: { slug: string } }) {
         </Link>
       </div>
 
-      <article className="py-6 max-w-3xl mx-auto ">
+      <article className="mx-auto max-w-3xl py-6 ">
         <time
           dateTime={blog.date}
           className="block text-sm text-muted-foreground"
         >
           Published on {format(parseISO(blog.date), "LLLL d, yyyy")}
         </time>
-        <h1 className="mt-2 inline-block font-bold text-4xl leading-tight lg:text-5xl mb-6">
+        <h1 className="mb-6 mt-2 inline-block text-4xl font-bold leading-tight lg:text-5xl">
           {blog.title}
         </h1>
         <div>
@@ -112,7 +112,7 @@ async function page({ params }: { params: { slug: string } }) {
         </div>
       </article>
     </div>
-  );
+  )
 }
 
-export default page;
+export default page

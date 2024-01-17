@@ -1,20 +1,20 @@
-"use client";
-import IconCard from "@/components/iconCard";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { baseUrl } from "@/lib/axiosConfig";
-import { cn } from "@/lib/utils";
-import { iconTypes } from "@/types";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Search } from "lucide-react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
+"use client"
+import IconCard from "@/components/iconCard"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { baseUrl } from "@/lib/axiosConfig"
+import { cn } from "@/lib/utils"
+import { iconTypes } from "@/types"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import axios from "axios"
+import { Search } from "lucide-react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import React, { useEffect, useRef, useState } from "react"
+import { useInView } from "react-intersection-observer"
 
 const IconsRenderer = () => {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
 
   const [platform, setPlatform] = useState<
     "ALL" | "WINDOWS" | "MACOS" | "OTHER" | ""
@@ -25,31 +25,31 @@ const IconsRenderer = () => {
       | "MACOS"
       | "OTHER"
       | "") ?? ""
-  );
-  const [query, setQuery] = useState<string>("");
-  const initialQueryHandler = useRef<boolean>(true);
+  )
+  const [query, setQuery] = useState<string>("")
+  const initialQueryHandler = useRef<boolean>(true)
 
   const { ref, inView } = useInView({
     triggerOnce: true,
-  });
+  })
   const fetchIcons = async (pageParams: any) => {
     try {
-      let verifiedPlatform: string = "";
+      let verifiedPlatform: string = ""
 
       if (
         ["ALL", "WINDOWS", "MACOS", "OTHER", ""].includes(
           platform.toUpperCase()
         )
       ) {
-        verifiedPlatform = platform.toUpperCase();
+        verifiedPlatform = platform.toUpperCase()
       }
 
       const res = await axios.get(
         `${baseUrl}/icons?page=${pageParams}&platform=${verifiedPlatform}&q=${query}`
-      );
-      return res.data.icons;
+      )
+      return res.data.icons
     } catch (e) {}
-  };
+  }
 
   const {
     data,
@@ -64,46 +64,46 @@ const IconsRenderer = () => {
     refetchOnReconnect: false,
     queryKey: ["allIconsQuery"],
     queryFn: async ({ pageParam }) => {
-      return await fetchIcons(pageParam);
+      return await fetchIcons(pageParam)
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage: any, pages) => {
       if (lastPage) {
-        return lastPage.length >= 24 ? pages.length + 1 : undefined;
+        return lastPage.length >= 24 ? pages.length + 1 : undefined
       }
-      return undefined;
+      return undefined
     },
-  });
+  })
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      fetchNextPage()
     }
-    return () => {};
-  }, [inView]);
+    return () => {}
+  }, [inView])
 
   useEffect(() => {
     if (platform !== "") {
-      refetch();
+      refetch()
     }
-  }, [platform]);
+  }, [platform])
 
   useEffect(() => {
     if (!initialQueryHandler.current) {
       const delayDebounceFn = setTimeout(() => {
-        refetch();
-      }, 300);
+        refetch()
+      }, 300)
 
-      return () => clearTimeout(delayDebounceFn);
+      return () => clearTimeout(delayDebounceFn)
     } else if (query !== "") {
-      initialQueryHandler.current = false;
-      refetch();
+      initialQueryHandler.current = false
+      refetch()
     }
-  }, [query]);
+  }, [query])
 
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-lg font-bold hidden md:block">Icons</h1>
+        <h1 className="hidden text-lg font-bold md:block">Icons</h1>
         <div className="flex gap-2">
           <Input
             type="text"
@@ -116,14 +116,14 @@ const IconsRenderer = () => {
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="mt-4 flex gap-2">
         <button
           onClick={() => {
-            setPlatform("ALL");
+            setPlatform("ALL")
           }}
-          className={` text-sm  hover:text-foreground duration-300 ${
+          className={` text-sm  duration-300 hover:text-foreground ${
             platform === "ALL" || platform === ""
-              ? "underline text-foreground"
+              ? "text-foreground underline"
               : "text-foreground/60"
           }`}
         >
@@ -133,9 +133,9 @@ const IconsRenderer = () => {
           onClick={() => setPlatform("WINDOWS")}
           className={` ${
             platform === "WINDOWS"
-              ? "underline text-foreground"
+              ? "text-foreground underline"
               : "text-foreground/60"
-          } text-sm  hover:text-foreground duration-300`}
+          } text-sm  duration-300 hover:text-foreground`}
         >
           Windows
         </button>
@@ -143,15 +143,15 @@ const IconsRenderer = () => {
           onClick={() => setPlatform("MACOS")}
           className={` ${
             platform === "MACOS"
-              ? "underline text-foreground"
+              ? "text-foreground underline"
               : "text-foreground/60"
-          } text-sm  hover:text-foreground duration-300`}
+          } text-sm  duration-300 hover:text-foreground`}
         >
           Mac Os
         </button>
       </div>
       <div className="mt-3">
-        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
           {data
             ? data.pages.map((page: iconTypes[], index: number) => (
                 <React.Fragment key={index}>
@@ -162,13 +162,13 @@ const IconsRenderer = () => {
                           <div key={icon.id} ref={ref}>
                             <IconCard icon={icon} />
                           </div>
-                        );
+                        )
                       } else {
                         return (
                           <div key={icon.id}>
                             <IconCard icon={icon} />
                           </div>
-                        );
+                        )
                       }
                     })}
                 </React.Fragment>
@@ -178,15 +178,15 @@ const IconsRenderer = () => {
             ? [...Array(12)].map((item, index) => (
                 <div
                   key={index}
-                  className="min-h-48 w-full bg-muted rounded-md animate-pulse"
+                  className="min-h-48 w-full animate-pulse rounded-md bg-muted"
                 ></div>
               ))
             : null}
         </div>
         {!isFetching && data?.pages[0].length === 0 ? (
-          <div className="flex justify-center items-center flex-col py-12 w-full">
+          <div className="flex w-full flex-col items-center justify-center py-12">
             <h1 className="text-3xl font-bold">No Icons Found</h1>
-            <p className="text-lg text-primary/50 mt-3">
+            <p className="mt-3 text-lg text-primary/50">
               Don&apos;t worry create your own icon.{" "}
             </p>
             <Link
@@ -199,7 +199,7 @@ const IconsRenderer = () => {
         ) : null}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default IconsRenderer;
+export default IconsRenderer

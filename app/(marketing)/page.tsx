@@ -1,10 +1,10 @@
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import React from "react";
-import IconCard from "@/components/iconCard";
-import { db } from "@/lib/db";
-import { unstable_cache } from "next/cache";
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
+import React from "react"
+import IconCard from "@/components/iconCard"
+import { db } from "@/lib/db"
+import { unstable_cache } from "next/cache"
 
 const getPopularIcons = unstable_cache(
   async () =>
@@ -22,22 +22,22 @@ const getPopularIcons = unstable_cache(
   {
     revalidate: 3600,
   }
-);
+)
 
 export default async function page() {
-  const icons = await getPopularIcons();
+  const icons = await getPopularIcons()
   return (
-    <div className="container md:mt-24 mt-6">
+    <div className="container mt-6 md:mt-24">
       <div className=" flex flex-col items-center">
-        <p className="text-foreground p-2 text-sm rounded bg-muted ">
+        <p className="rounded bg-muted p-2 text-sm text-foreground ">
           Icon library by the community
         </p>
-        <h1 className="md:text-6xl text-5xl my-3 font-bold">My Icons</h1>
-        <p className="md:text-lg text-base text-center font-medium text-foreground/60">
+        <h1 className="my-3 text-5xl font-bold md:text-6xl">My Icons</h1>
+        <p className="text-center text-base font-medium text-foreground/60 md:text-lg">
           Customize your icons according to your preferences. Your computer,
           your icons.
         </p>
-        <div className="flex justify-center gap-6 mt-6">
+        <div className="mt-6 flex justify-center gap-6">
           <Link
             className={cn(
               buttonVariants({ variant: "default", size: "sm" }),
@@ -51,24 +51,24 @@ export default async function page() {
           <Link
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "flex gap-2 relative"
+              "relative flex gap-2"
             )}
             href="/create"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full  w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="absolute inline-flex h-full w-full  animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
             </span>
             Create Custom Icon
           </Link>
         </div>
       </div>
 
-      <div className="md:mt-24 mt-12">
-        <div className="flex justify-between items-center">
-          <h2 className="font-bold text-lg">Popular Icons</h2>
+      <div className="mt-12 md:mt-24">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold">Popular Icons</h2>
         </div>
-        <div className="mt-6 grid grid-cols-2  md:grid-cols-4 lg:grid-cols-6 gap-6 mb-6">
+        <div className="mb-6 mt-6 grid  grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
           {icons.map((icon, index) => (
             <IconCard icon={icon} key={index} />
           ))}
@@ -80,5 +80,5 @@ export default async function page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,61 +1,61 @@
-import React from "react";
-import { Eye, EyeOff, FileEdit, Lock, Trash, Unlock } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react"
+import { Eye, EyeOff, FileEdit, Lock, Trash, Unlock } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux"
 import {
   selectBaseIconConfig,
   updateBaseIconLocked,
   updateBaseIconVisibility,
-} from "@/store/features/playground/baseIconSlice";
-import { useDropzone } from "react-dropzone";
+} from "@/store/features/playground/baseIconSlice"
+import { useDropzone } from "react-dropzone"
 import {
   addIconsArrayIcon,
   removeIconsArrayIcon,
   selectIconsArrayConfig,
   updateIconsArrayIconLocked,
   updateIconsArrayIconVisible,
-} from "@/store/features/playground/iconsArraySlice";
-import Image from "next/image";
+} from "@/store/features/playground/iconsArraySlice"
+import Image from "next/image"
 
 const SidebarTopControls = ({
   setBaseIconModalState,
 }: {
-  setBaseIconModalState: React.Dispatch<React.SetStateAction<boolean>>;
+  setBaseIconModalState: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
-  const baseIconConfig = useSelector(selectBaseIconConfig);
-  const iconArrayConfig = useSelector(selectIconsArrayConfig);
-  const dispatch = useDispatch();
+  const baseIconConfig = useSelector(selectBaseIconConfig)
+  const iconArrayConfig = useSelector(selectIconsArrayConfig)
+  const dispatch = useDispatch()
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: async (acceptedFiles) => {
       const base64Promises = acceptedFiles.map(
         (file) =>
           new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = (e) => resolve(e?.target?.result); // Optional chaining here
-            reader.readAsDataURL(file);
+            const reader = new FileReader()
+            reader.onload = (e) => resolve(e?.target?.result) // Optional chaining here
+            reader.readAsDataURL(file)
           })
-      );
-      const base64Results = await Promise.all(base64Promises);
+      )
+      const base64Results = await Promise.all(base64Promises)
       dispatch(
         addIconsArrayIcon({
           locked: false,
           visible: true,
           base64: base64Results[0] as string,
         })
-      );
+      )
     },
-  });
+  })
 
   return (
-    <div className="flex-1 mt-3">
+    <div className="mt-3 flex-1">
       <p className="font-bold">Layers</p>
-      <ul className="text-xs mt-2">
-        <li className=" text-foreground/60 py-2 border-t border-b flex justify-between">
-          <span className="flex gap-1 items-center">
+      <ul className="mt-2 text-xs">
+        <li className=" flex justify-between border-b border-t py-2 text-foreground/60">
+          <span className="flex items-center gap-1">
             Base Icon{" "}
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full  w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="absolute inline-flex h-full w-full  animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
             </span>
           </span>
           <span className="flex flex-wrap gap-2">
@@ -91,9 +91,9 @@ const SidebarTopControls = ({
         {iconArrayConfig.map((item, index) => (
           <li
             key={index}
-            className="flex w-full justify-between text-foreground/60 border-b py-2"
+            className="flex w-full justify-between border-b py-2 text-foreground/60"
           >
-            <span className="flex gap-1 items-center ">
+            <span className="flex items-center gap-1 ">
               {" "}
               <Image
                 src={item.base64}
@@ -158,10 +158,10 @@ const SidebarTopControls = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SidebarTopControls;
+export default SidebarTopControls
 // const toggleVisibilty = (id: number) => {
 //   setlayersArray((prev) =>
 //     prev.map((item) =>

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import React from "react";
+import Link from "next/link"
+import React from "react"
 
 export default function page() {
   return (
@@ -14,16 +14,16 @@ export default function page() {
           computer, giving you control over your computing environment.
         </p>
         <div>
-          <h6 className="font-bold text-base ">User Registration:</h6>
-          <p className="text-sm text-foreground/60 ml-2 mt-2">
+          <h6 className="text-base font-bold ">User Registration:</h6>
+          <p className="ml-2 mt-2 text-sm text-foreground/60">
             To access our services, basic registration via Google or GitHub
             profiles is required. We store your email, password, and profile
             link securely in our database.
           </p>
         </div>
         <div>
-          <h6 className="font-bold text-base ">User Content:</h6>
-          <p className="text-sm text-foreground/60 ml-2 mt-2">
+          <h6 className="text-base font-bold ">User Content:</h6>
+          <p className="ml-2 mt-2 text-sm text-foreground/60">
             Users are prohibited from adding unnecessary or inappropriate icons
             that violate our rules, including but not limited to nudity,
             violations, or any other content deemed inappropriate. Icons
@@ -31,16 +31,16 @@ export default function page() {
           </p>
         </div>
         <div>
-          <h6 className="font-bold text-base ">Ownership and Maintenance:</h6>
-          <p className="text-sm text-foreground/60 ml-2 mt-2">
+          <h6 className="text-base font-bold ">Ownership and Maintenance:</h6>
+          <p className="ml-2 mt-2 text-sm text-foreground/60">
             MyIcons.tech is an open-source project created by Jashandeep and
             maintained by the community. There is no singular owner, emphasizing
             the collaborative nature of our platform.
           </p>
         </div>
         <div>
-          <h6 className="font-bold text-base ">Disclaimer:</h6>
-          <p className="text-sm text-foreground/60 ml-2 mt-2">
+          <h6 className="text-base font-bold ">Disclaimer:</h6>
+          <p className="ml-2 mt-2 text-sm text-foreground/60">
             Users are prohibited from adding unnecessary or inappropriate icons
             that violate our rules, including but not limited to nudity,
             violations, or any other content deemed inappropriate. Icons
@@ -48,13 +48,13 @@ export default function page() {
           </p>
         </div>
         <div>
-          <p className="text-sm text-foreground/60 ml-2 mt-2">
+          <p className="ml-2 mt-2 text-sm text-foreground/60">
             By using MyIcons.tech, you agree to abide by these terms and
             conditions. We reserve the right to modify or update these terms at
             any time, and it is your responsibility to stay informed about any
             changes. If you have any questions or concerns, please contact us at
             <Link
-              className="underline text-foreground"
+              className="text-foreground underline"
               href="mailto:jashandeep1659@gmail.com"
             >
               jashandeep1659@gmail.com
@@ -64,5 +64,5 @@ export default function page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

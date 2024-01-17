@@ -1,15 +1,15 @@
-import React from "react";
-import { allBlogs } from "contentlayer/generated";
-import { Home } from "lucide-react";
-import Image from "next/image";
-import { format, parseISO } from "date-fns";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import React from "react"
+import { allBlogs } from "contentlayer/generated"
+import { Home } from "lucide-react"
+import Image from "next/image"
+import { format, parseISO } from "date-fns"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 
 export default function page() {
   return (
-    <div className="container md:mt-12 mt-6">
+    <div className="container mt-6 md:mt-12">
       <Link
         href={"/"}
         className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
@@ -18,12 +18,12 @@ export default function page() {
         Home
       </Link>
 
-      <div className="grid md:grid-cols-2 md:gap-12 gap-6 mt-6">
+      <div className="mt-6 grid gap-6 md:grid-cols-2 md:gap-12">
         {allBlogs.map((blog, index: number) => (
           <Link
             href={blog._id}
             key={index}
-            className="border rounded-lg overflow-hidden cursor-pointer hover:bg-muted duration-300"
+            className="cursor-pointer overflow-hidden rounded-lg border duration-300 hover:bg-muted"
           >
             <div>
               <Image
@@ -31,11 +31,11 @@ export default function page() {
                 alt={blog.title}
                 width={640}
                 height={390}
-                className="rounded-lg w-full"
+                className="w-full rounded-lg"
               />
             </div>
             <div className="p-2">
-              <h2 className="text-lg font-bold my-2">{blog.title}</h2>
+              <h2 className="my-2 text-lg font-bold">{blog.title}</h2>
               {blog.date && (
                 <p className="text-sm text-muted-foreground">
                   {format(parseISO(blog.date), "LLLL d, yyyy")}
@@ -46,5 +46,5 @@ export default function page() {
         ))}
       </div>
     </div>
-  );
+  )
 }
