@@ -112,7 +112,7 @@ attrib +r "%cd%"
   return (
     <div className="fixed left-0  top-0  z-20 flex h-screen w-full items-center justify-center bg-black/80  px-4 py-12 md:px-4 md:py-4 ">
       <div
-        className=" h-full w-full overflow-scroll rounded-md border-2 bg-background md:w-3/4"
+        className=" h-full w-full overflow-y-auto rounded-md border-2 bg-background md:h-auto md:w-3/4"
         ref={ref}
       >
         <div className="flex items-center justify-between border-b p-4">
