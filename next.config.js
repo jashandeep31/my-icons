@@ -10,6 +10,7 @@ const nextConfig = {
   },
   images: {
     domains: [
+      "client-s3-bucket.blr1.digitaloceanspaces.com",
       "my-icons.blr1.digitaloceanspaces.com",
       "avatars.githubusercontent.com",
       "lh3.googleusercontent.com",

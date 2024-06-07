@@ -17,6 +17,7 @@ const FormDataSchema = z.object({
 
 export const POST = catchAsync(async (req: Request) => {
   const session = await getCurrentUser()
+
   if (!session) {
     throw new AppError("Login is required", 401)
   }
@@ -72,7 +73,6 @@ export const POST = catchAsync(async (req: Request) => {
       userId: session.id,
     },
   })
-
   return NextResponse.json(
     {
       message: "Icon successfully generated",
