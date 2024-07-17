@@ -37,7 +37,9 @@ export const POST = catchAsync(async (req: Request) => {
   const validatedFormData = validatedForm.data
 
   async function fetchAndConvertImage(url: string) {
-    const response = await fetch(`${process.env.CONVERTER_URL}/${url}`)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_CONVERTER_URL}/${url}`
+    )
     const blob = await response.blob()
     const buffer = Buffer.from(await new Response(blob).arrayBuffer())
     return buffer
